@@ -30,7 +30,7 @@ import img11 from "../img/Hydromax Series/Hydromax AW 32.png";
 import img12 from "../img/Hydromax Series/Hydromax AW 46.png";
 import img13 from "../img/Aerosols/Anti Spatter Spray.jpg";
 import img14 from "../img/Aerosols/Electrical Contact Cleaner Spray.jpg";
-import img15 from "../img/Aerosols/PCB card coating Spray.jpg";
+import img15 from "../img/Aerosols/PCB card coating spray.jpg";
 import img16 from "../img/Aerosols/Rust Penetrate Spray.jpg";
 import img17 from "../img/Engine Oil series/Engine Oil Turbo-X 15W40 CI4 Plus.png";
 import img18 from "../img/Gear Oil series/geardrive ep 100.png";
