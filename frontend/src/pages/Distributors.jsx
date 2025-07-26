@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AlertCircle, Plus, X } from 'lucide-react';
+import { AlertCircle, Plus, X, MapPin, Building, Phone, Globe } from 'lucide-react';
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -35,7 +35,7 @@ const isAdminUser = () => {
 };
 
 const Alert = ({ children, variant = 'default', onClose }) => {
-  const baseClasses = 'p-4 rounded-lg border flex items-start space-x-3 mb-4';
+  const baseClasses = 'p-3 sm:p-4 rounded-lg border flex items-start space-x-2 sm:space-x-3 mb-4';
   const variants = {
     default: 'bg-blue-50 border-blue-200 text-blue-800',
     error: 'bg-red-50 border-red-200 text-red-800',
@@ -45,8 +45,8 @@ const Alert = ({ children, variant = 'default', onClose }) => {
   
   return (
     <div className={`${baseClasses} ${variants[variant]}`}>
-      <AlertCircle className="w-5 h-5 mt-0.5 flex-shrink-0" />
-      <div className="flex-1">{children}</div>
+      <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 mt-0.5 flex-shrink-0" />
+      <div className="flex-1 text-sm sm:text-base">{children}</div>
       {onClose && (
         <button 
           onClick={onClose}
@@ -97,10 +97,10 @@ const AddDistributorModal = ({ isOpen, onClose, onSubmit, isSubmitting }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">Add New Distributor</h3>
+          <h3 className="text-lg sm:text-xl font-semibold text-gray-900">Add New Distributor</h3>
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600"
@@ -121,7 +121,7 @@ const AddDistributorModal = ({ isOpen, onClose, onSubmit, isSubmitting }) => {
               value={formData.country}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
               placeholder="Enter country"
               disabled={isSubmitting}
             />
@@ -137,7 +137,7 @@ const AddDistributorModal = ({ isOpen, onClose, onSubmit, isSubmitting }) => {
               value={formData.company}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
               placeholder="Enter company name"
               disabled={isSubmitting}
             />
@@ -153,7 +153,7 @@ const AddDistributorModal = ({ isOpen, onClose, onSubmit, isSubmitting }) => {
               onChange={handleChange}
               required
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
               placeholder="Enter address"
               disabled={isSubmitting}
             />
@@ -169,17 +169,17 @@ const AddDistributorModal = ({ isOpen, onClose, onSubmit, isSubmitting }) => {
               value={formData.phone}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
               placeholder="Enter phone number"
               disabled={isSubmitting}
             />
           </div>
           
-          <div className="flex space-x-3 pt-4">
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 pt-4">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 disabled:opacity-50"
+              className="w-full sm:flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 disabled:opacity-50 text-sm sm:text-base"
               disabled={isSubmitting}
             >
               Cancel
@@ -187,7 +187,7 @@ const AddDistributorModal = ({ isOpen, onClose, onSubmit, isSubmitting }) => {
             <button
               type="submit"
               onClick={handleSubmit}
-              className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+              className="w-full sm:flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 text-sm sm:text-base"
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Adding...' : 'Add Distributor'}
@@ -199,8 +199,45 @@ const AddDistributorModal = ({ isOpen, onClose, onSubmit, isSubmitting }) => {
   );
 };
 
+const DistributorCard = ({ distributor }) => (
+  <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+    <div className="space-y-3">
+      <div className="flex items-start space-x-2">
+        <Globe className="w-4 h-4 text-blue-600 mt-1 flex-shrink-0" />
+        <div>
+          <span className="text-xs text-gray-500 uppercase tracking-wide">Country</span>
+          <p className="font-semibold text-gray-900">{distributor.country}</p>
+        </div>
+      </div>
+      
+      <div className="flex items-start space-x-2">
+        <Building className="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+        <div>
+          <span className="text-xs text-gray-500 uppercase tracking-wide">Company</span>
+          <p className="font-semibold text-gray-900">{distributor.company}</p>
+        </div>
+      </div>
+      
+      <div className="flex items-start space-x-2">
+        <MapPin className="w-4 h-4 text-red-600 mt-1 flex-shrink-0" />
+        <div>
+          <span className="text-xs text-gray-500 uppercase tracking-wide">Address</span>
+          <p className="text-gray-700 text-sm">{distributor.address}</p>
+        </div>
+      </div>
+      
+      <div className="flex items-start space-x-2">
+        <Phone className="w-4 h-4 text-purple-600 mt-1 flex-shrink-0" />
+        <div>
+          <span className="text-xs text-gray-500 uppercase tracking-wide">Phone</span>
+          <p className="text-gray-700 font-mono text-sm">{distributor.phone}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 const DistributorTable = () => {
-  // ✅ Move hardcoded data outside state for fallback reference
   const staticDistributors = [
     {
       country: 'Brazil',
@@ -229,7 +266,6 @@ const DistributorTable = () => {
   ];
 
   const [distributors, setDistributors] = useState(staticDistributors);
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -237,6 +273,7 @@ const DistributorTable = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [viewMode, setViewMode] = useState('cards'); // 'cards' or 'table'
 
   useEffect(() => {
     const initializeAuth = async () => {
@@ -251,14 +288,25 @@ const DistributorTable = () => {
       
       setUser(currentUser);
       setIsAdmin(adminStatus);
-
-      // ✅ REMOVED - No more auth error messages for non-admin/non-logged users
-      
       setIsLoading(false);
     };
 
+    // Set initial view mode based on screen size
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setViewMode('cards');
+      } else {
+        setViewMode('table');
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    
     initializeAuth();
     fetchDistributors();
+
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const fetchDistributors = async () => {
@@ -268,25 +316,18 @@ const DistributorTable = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Distributors fetched:', data.distributors);
-        // If backend has data, use it; otherwise keep static distributors
         if (data.distributors && data.distributors.length > 0) {
-          // Combine backend data with static data (backend first)
           setDistributors([...data.distributors, ...staticDistributors]);
         }
-        // If no backend data, static distributors remain (already set in useState)
       } else {
         console.error('Failed to fetch distributors:', response.status);
-        // Keep static data if fetch fails (already set in useState)
       }
     } catch (error) {
       console.error('Error fetching distributors:', error);
-      // Keep static data if network error occurs (already set in useState)
     }
   };
 
   const handleAddDistributor = async (formData) => {
-    // ✅ REMOVED - No more auth checks here, only admin users can open modal anyway
-    
     setIsSubmitting(true);
     setSubmitError('');
     setSuccessMessage('');
@@ -307,10 +348,8 @@ const DistributorTable = () => {
       if (response.ok) {
         setSuccessMessage('Distributor added successfully!');
         setShowModal(false);
-        // Add new distributor to the list (at the beginning)
         setDistributors(prev => [data.distributors, ...prev]);
         
-        // Clear success message after 3 seconds
         setTimeout(() => setSuccessMessage(''), 3000);
       } else {
         setSubmitError(data.message || 'Failed to add distributor');
@@ -324,14 +363,13 @@ const DistributorTable = () => {
   };
 
   const handleOpenModal = () => {
-    // ✅ REMOVED - No more auth error messages, button only shows for admin anyway
     setShowModal(true);
     setSubmitError('');
   };
 
   if (isLoading) {
     return (
-      <div className="py-20 bg-white">
+      <div className="py-12 sm:py-20 bg-white">
         <div className="flex justify-center items-center">
           <div className="text-lg text-gray-600">Loading...</div>
         </div>
@@ -340,65 +378,143 @@ const DistributorTable = () => {
   }
 
   return (
-    <div className="py-20 bg-white">
+    <div className="py-8 sm:py-12 lg:py-20 bg-white">
       <section className="bg-white py-1">
-        <div className="flex justify-between items-center mb-8 px-4 max-w-5xl mx-auto">
-          <h2 className="text-5xl font-bold text-gray-900">
-            Our Distributors
-          </h2>
-          
-          {/* ✅ ONLY show button for admin users - no error messages for others */}
-          {user && isAdmin && (
-            <button
-              onClick={handleOpenModal}
-              className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              <Plus className="w-5 h-5" />
-              <span>Add Distributor</span>
-            </button>
+        <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          {/* Header Section */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 space-y-4 sm:space-y-0">
+            <div>
+              <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-gray-900 mb-2">
+                Our Distributors
+              </h2>
+              <p className="text-gray-600 text-sm sm:text-base">
+                Find our authorized distributors worldwide
+              </p>
+            </div>
+            
+            {/* Controls */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+              {/* View Toggle - Hidden on mobile */}
+              <div className="hidden md:flex bg-gray-100 rounded-lg p-1">
+                <button
+                  onClick={() => setViewMode('table')}
+                  className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                    viewMode === 'table' 
+                      ? 'bg-white text-gray-900 shadow-sm' 
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  Table
+                </button>
+                <button
+                  onClick={() => setViewMode('cards')}
+                  className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                    viewMode === 'cards' 
+                      ? 'bg-white text-gray-900 shadow-sm' 
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  Cards
+                </button>
+              </div>
+
+              {/* Add Button */}
+              {user && isAdmin && (
+                <button
+                  onClick={handleOpenModal}
+                  className="flex items-center justify-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto"
+                >
+                  <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-sm sm:text-base">Add Distributor</span>
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Alert Messages */}
+          {submitError && (
+            <div className="mb-4">
+              <Alert variant="error" onClose={() => setSubmitError('')}>
+                {submitError}
+              </Alert>
+            </div>
           )}
-        </div>
 
-        {/* ✅ REMOVED - No more auth error messages */}
+          {successMessage && (
+            <div className="mb-4">
+              <Alert variant="success" onClose={() => setSuccessMessage('')}>
+                {successMessage}
+              </Alert>
+            </div>
+          )}
 
-        {submitError && (
-          <div className="px-4 max-w-5xl mx-auto mb-4">
-            <Alert variant="error" onClose={() => setSubmitError('')}>
-              {submitError}
-            </Alert>
-          </div>
-        )}
-
-        {successMessage && (
-          <div className="px-4 max-w-5xl mx-auto mb-4">
-            <Alert variant="success" onClose={() => setSuccessMessage('')}>
-              {successMessage}
-            </Alert>
-          </div>
-        )}
-
-        <div className="flex justify-center px-4">
-          <div className="w-full max-w-5xl overflow-x-auto border border-gray-300 rounded-lg">
-            <table className="min-w-full divide-y divide-gray-200 text-lg">
-              <thead className="bg-gray-100">
-                <tr>
-                  <th className="text-left px-6 py-4">Country</th>
-                  <th className="text-left px-6 py-4">Company</th>
-                  <th className="text-left px-6 py-4">Address</th>
-                  <th className="text-left px-6 py-4">Phone</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-100">
-                {distributors.map((dist, index) => (
-                  <tr key={index}>
-                    <td className="px-6 py-4">{dist.country}</td>
-                    <td className="px-6 py-4">{dist.company}</td>
-                    <td className="px-6 py-4">{dist.address}</td>
-                    <td className="px-6 py-4">{dist.phone}</td>
+          {/* Content */}
+          {viewMode === 'cards' ? (
+            /* Card View */
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+              {distributors.map((dist, index) => (
+                <DistributorCard key={index} distributor={dist} />
+              ))}
+            </div>
+          ) : (
+            /* Table View - Only visible on desktop */
+            <div className="hidden md:block overflow-x-auto border border-gray-300 rounded-lg shadow-sm">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="text-left px-4 lg:px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Country
+                    </th>
+                    <th className="text-left px-4 lg:px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Company
+                    </th>
+                    <th className="text-left px-4 lg:px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Address
+                    </th>
+                    <th className="text-left px-4 lg:px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Phone
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {distributors.map((dist, index) => (
+                    <tr key={index} className="hover:bg-gray-50 transition-colors">
+                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <Globe className="w-4 h-4 text-blue-600 mr-2" />
+                          <span className="text-sm font-medium text-gray-900">{dist.country}</span>
+                        </div>
+                      </td>
+                      <td className="px-4 lg:px-6 py-4">
+                        <div className="flex items-center">
+                          <Building className="w-4 h-4 text-green-600 mr-2" />
+                          <span className="text-sm text-gray-900">{dist.company}</span>
+                        </div>
+                      </td>
+                      <td className="px-4 lg:px-6 py-4">
+                        <div className="flex items-start">
+                          <MapPin className="w-4 h-4 text-red-600 mr-2 mt-0.5 flex-shrink-0" />
+                          <span className="text-sm text-gray-700">{dist.address}</span>
+                        </div>
+                      </td>
+                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <Phone className="w-4 h-4 text-purple-600 mr-2" />
+                          <span className="text-sm text-gray-700 font-mono">{dist.phone}</span>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Stats */}
+          <div className="mt-6 sm:mt-8 text-center">
+            <p className="text-sm sm:text-base text-gray-600">
+              Showing <span className="font-semibold">{distributors.length}</span> distributors worldwide
+            </p>
           </div>
         </div>
       </section>
