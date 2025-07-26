@@ -696,7 +696,7 @@ const ProductsPage = () => {
                 Details
               </button>
 
-              <style jsx>{`
+              <style>{`
                 .boton-elegante {
                   width: 80%;
                   margin: 0 auto;

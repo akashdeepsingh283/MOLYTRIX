@@ -1,8 +1,8 @@
+// App.jsx
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-
 import Navbar from './components/Navbar';
-import Footer from './components/Footer'; 
+import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -12,15 +12,23 @@ import ProductsPage from './pages/ProductsPage';
 import DistributorTable from './pages/Distributors';
 import './pages/index.css';
 
-function App() {
+// Create a wrapper component that uses useLocation
+function AppContent() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  
+  // This is now safe because AppContent is rendered inside BrowserRouter
   const location = useLocation();
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
+    try {
+      const savedUser = localStorage.getItem('user');
+      if (savedUser) {
+        setUser(JSON.parse(savedUser));
+      }
+    } catch (error) {
+      console.error('Error parsing saved user:', error);
+      localStorage.removeItem('user');
     }
     setLoading(false);
   }, []);
@@ -56,20 +64,31 @@ function App() {
         <Route path="/Distributor" element={<DistributorTable />} />
         <Route
           path="/register"
-          element={user ? <Navigate to="/dashboard" /> : <RegisterPage onLogin={login} />}
+          element={
+            user ? <Navigate to="/dashboard" replace /> : <RegisterPage onLogin={login} />
+          }
         />
         <Route
           path="/login"
-          element={user ? <Navigate to="/dashboard" /> : <LoginPage onLogin={login} />}
+          element={
+            user ? <Navigate to="/dashboard" replace /> : <LoginPage onLogin={login} />
+          }
         />
         <Route
           path="/dashboard"
-          element={user ? <Dashboard user={user} /> : <Navigate to="/login" />}
+          element={
+            user ? <Dashboard user={user} /> : <Navigate to="/login" replace />
+          }
         />
       </Routes>
       {!hideLayout && <Footer />}
     </div>
   );
+}
+
+// Main App component - NO router hooks here, just returns the content wrapper
+function App() {
+  return <AppContent />;
 }
 
 export default App;
