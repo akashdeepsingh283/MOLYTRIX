@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <div className="bg-gray-900 text-white py-12">
@@ -12,7 +12,8 @@ const Footer = () => {
             </p>
           </div>
           <div>
-            <h4 className="text-lg font-semibold mb-4">Products</h4>
+            <Link to={'/products'}><h4 className="text-lg font-semibold mb-4">Products</h4></Link>
+            
             <ul className="space-y-2 text-gray-400">
               <li>Engine Oils</li>
               <li>Hydraulic Fluids</li>
@@ -26,9 +27,12 @@ const Footer = () => {
               <li>
             About Us
             </li>
-              <li>
+            <Link to={'/contact'}>
+             <li>
                 Contact
             </li>
+            </Link>
+             
             </ul>
             </div>
           </div>
