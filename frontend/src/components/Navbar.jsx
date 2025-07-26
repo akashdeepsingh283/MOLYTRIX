@@ -125,6 +125,16 @@ const Navbar = ({ user, onLogout }) => {
               >
                 Products
               </Link>
+              {/* FIXED: Added missing Distributors link for mobile */}
+              <Link
+                to="/Distributor"
+                className={`transition-colors ${
+                  isActive('/Distributor') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Distributors
+              </Link>
               <Link
                 to="/contact"
                 className={`transition-colors ${
