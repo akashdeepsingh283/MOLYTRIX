@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import img3 from "../img/Greases/Lithomax Ep 2.png";
 import img4 from "../img/Greases/Lithplex Blue 220.png";
-import img5 from "../img/Greases/Sulphocal 220.png";
+import img5 from "../img/Greases/SULPHOCAL 220.png";
 import img6 from "../img/Greases/polyplex EM 100.png";
 import img7 from "../img/Greases/polyplex HT 460.png";
 import img8 from "../img/Greases/spinplex 22.png";
@@ -47,7 +47,7 @@ import img28 from "../img/Greases/Lithomax EP 0.png";
 import img29 from "../img/Greases/Lithomax EP 00.png";
 import img30 from "../img/Greases/Lithomax EP 1.png";
 import img31 from "../img/Greases/Lithomax EP 3.png";
-import img32 from "../img/Greases/Sulphocal 460.png";
+import img32 from "../img/Greases/SULPHOCAL 460.png";
 
 const ProductsPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
