@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 function AppWrapper() {
   return (
     <Router>
-      <App />
+      <AppWrapper />
     </Router>
   );
 }
