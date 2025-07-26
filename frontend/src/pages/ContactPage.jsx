@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Phone, Mail, MapPin, Clock, Send, User, Building, MessageSquare, CheckCircle, Globe, Fan as Fax, AlertCircle } from 'lucide-react';
 const backendURL = import.meta.env.VITE_BACKEND_URL
 import { useNavigate, Link } from 'react-router-dom';
-import Maps from '../img/maps.png';
 const ContactPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
