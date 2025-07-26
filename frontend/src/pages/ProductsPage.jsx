@@ -92,8 +92,8 @@ const ProductsPage = () => {
           flashPoint: product.flashpoint,
           applications: product.applications,
         },
-        features: product.keyfeatures,
-        certifications: product.certifications,
+        features: product.keyfeatures || [], // Ensure it's an array
+        certifications: product.certifications || [], // Ensure it's an array
         isApiProduct: true, // Flag to identify API products
       }));
       
@@ -117,13 +117,14 @@ const ProductsPage = () => {
     fetchProducts();
   };
 
-  // Hardcoded products (your existing ones)
+  // Hardcoded products (your existing ones) - FIXED CATEGORIES
   const hardcodedProducts = [
     {
       id: "1",
       name: "Hydroprime HVI 46",
       category: "Hydromax",
       image: img1,
+      rating: 4.5,
       description:
       "High performance hydraulic fluid, based on the latest base oil and additive technology. The use of an special additive pack warrants optimal performance and a long service life.",
       specifications: [
@@ -137,6 +138,7 @@ const ProductsPage = () => {
         "Thyssen HT-N-256132",
         "US STEEL 126/127",
       ],
+      features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -144,6 +146,7 @@ const ProductsPage = () => {
       name: "Hydroprime AW 68",
       category: "Hydromax",
       image: img2,
+      rating: 4.3,
       description:
         "High performance hydraulic fluid, based on the latest base oil and additive technology. The use of an special additive pack warrants optimal performance and a long service life.",
       specifications: [
@@ -157,6 +160,7 @@ const ProductsPage = () => {
         "FZG A/8.3/90 = 12 (ISO VG 15, 22 and 32)",
         "CINCINATTI MILACRON P68/P69/P70 (ISO VG 32-68)"
       ],
+      features: ["Synthetic Formula", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -164,11 +168,13 @@ const ProductsPage = () => {
       name: "Lithomax EP 2",
       category: "Grease",
       image: img3,
+      rating: 4.7,
       description:
         "This product is specially formulated to lubricate all sorts of equipment and mechanisms. The grease will perform excellent for on- and off- road equipment, manufacturing, agriculture, mining, marine, forestry and general-purpose applications.",
       specifications: [
         "DIN 51502", "DIN 51825 KP N-30", "ISO 6743/9 L-XCDHB",
       ],
+      features: ["Biodegradable", "High Temperature Resistant"],
       isApiProduct: false,
     },
     {
@@ -176,11 +182,13 @@ const ProductsPage = () => {
       name: "Lithplex Blue 220",
       category: "Grease",
       image: img4,
+      rating: 4.6,
       description:
         "This product is a modern high performance product setting a new standard for a truly universal grease, suitable for both industrial and automotive ends. It is used in various types of bearing applications, including heavy load conditions and temperature peaks up to 160°C. ",
       specifications: [
         "DIN 51502", "DIN 51825 KP2P-30", "ISO 6743/9 L-XCEEB2", "ASTM D-4950 GC/LB",
             ],
+      features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -188,11 +196,13 @@ const ProductsPage = () => {
       name: "Sulphocal 220",
       category: "Grease",
       image: img5,
+      rating: 4.8,
       description:
         "This product is a calcium sulphonate complex thickened grease based on mineral oil with a high drop point and high resistance to cold and salt water as well as vapour resistance. The grease is as well provided with superior lubricating and sealing capacity and offers increased load carrying capacity. It offers corrosion protection and excellent water resistance which are essential in wet and corrosive environment.",
       specifications: [
         "DIN 51502", "DIN 51825 KP2U-30 / OG2U-30", "ISO 6743-9 L-XBFHB2",
       ],
+      features: ["Biodegradable", "High Temperature Resistant"],
       isApiProduct: false,
     },
     {
@@ -200,11 +210,13 @@ const ProductsPage = () => {
       name: "Polyplex EM 100",
       category: "Grease",
       image: img6,
+      rating: 4.4,
       description:
         "This product is specially formulated to lubricate all sorts of equipment and mechanisms. The grease will perform excellent for on- and off- road equipment, manufacturing, agriculture, mining, marine, forestry and general-purpose applications.",
       specifications: [
         "Medium and high speed bearings", "Bearings in cold environments and cooling systems", "Electric motor bearings", "Fan bearings, exhausters and pumps", "Oven wagon and drying tunnel bearings", "Bearings in conveyor belts", "Bearings and bolts in chains operated under strong temperatures variations", "Plain bearings and joints in plastic-plastic and plastic-metal contacts","Lubrication of wire guides, plastic bearings and slides",
       ],
+      features: ["Synthetic Formula", "Extended Service Life"],
       isApiProduct: false,
     }, 
     {
@@ -212,8 +224,10 @@ const ProductsPage = () => {
       name: "GREASE POLYPLEX HT 460",
       category: "Grease",
       image: img7,
+      rating: 4.5,
       description:
         "New technology high efficiency lubricating grease with a high viscosity base oil. It is formulated with a long life organic thickener, highly refined mineral oil and additive package to provide superior anti wear, EP properties and high antioxidant and anticorrosive capacity. The grease is perfectly suitable for bearing lubrication and for mechanisms exposed to the combined action of high temperatures, heavy loads and water action.",
+      features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -221,8 +235,10 @@ const ProductsPage = () => {
       name: "SPINPLEX 22",
       category: "Grease",
       image: img8,
+      rating: 4.3,
       description:
       "This product is a complex soap thickened synthetic grease. It provides high resistance to oxidation, superior anticorrosive capacity, E.P. characteristics, good adherence to metal and good resistance to water, and resistance to vapour, acid and alkaline solutions.",
+      features: ["Synthetic Formula", "Biodegradable"],
       isApiProduct: false,
     },
     {
@@ -230,8 +246,10 @@ const ProductsPage = () => {
       name: "Hydromax HLPD 68",
       category: "Hydromax",
       image: img9,
+      rating: 4.6,
       description:
         "High performance hydraulic fluid, based on the latest base oil and additive technology. This product is a so called detergent hydraulic fluid and therefore very suitable where miscibility with water is required. It is formulated using ashless chemistry, is detergent and will keep systems clean while operating.",
+      features: ["Biodegradable", "Extended Service Life"],
       isApiProduct: false,
     }, 
     {
@@ -239,8 +257,10 @@ const ProductsPage = () => {
       name: "Hydropmax HLPD 46",
       category: "Hydromax",
       image: img10,
+      rating: 4.4,
       description:
         "High performance hydraulic fluid, based on the latest base oil and additive technology. This product is a so called detergent hydraulic fluid and therefore very suitable where miscibility with water is required. It is formulated using ashless chemistry, is detergent and will keep systems clean while operating.",
+      features: ["Biodegradable", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -248,8 +268,10 @@ const ProductsPage = () => {
       name: "Hydromax AW 32",
       category: "Hydromax",
       image: img11,
+      rating: 4.7,
       description:
         "High performance hydraulic fluid, based on the latest base oil and additive technology. This product is a so called detergent hydraulic fluid and therefore very suitable where miscibility with water is required. It is formulated using ashless chemistry, is detergent and will keep systems clean while operating.",
+      features: ["Synthetic Formula", "Extended Service Life"],
       isApiProduct: false,
     }, 
     {
@@ -257,8 +279,10 @@ const ProductsPage = () => {
       name: "Hydromax AW 46",
       category: "Hydromax",
       image: img12,
+      rating: 4.5,
       description:
         "High performance hydraulic fluid, based on the latest base oil and additive technology. This product is a so called detergent hydraulic fluid and therefore very suitable where miscibility with water is required. It is formulated using ashless chemistry, is detergent and will keep systems clean while operating.",
+      features: ["Synthetic Formula", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -266,8 +290,10 @@ const ProductsPage = () => {
       name: "Anti Spatter Spray",
       category: "Aerosols",
       image: img13,
+      rating: 4.2,
       description:
         "Anti Spatter Spray is a high-performance aerosol formulation designed to prevent welding spatter from adhering to metal surfaces, welding equipment, and nozzles. It ensures cleaner welds and reduces post-welding cleanup, saving time and effort in production.",
+      features: ["Synthetic Formula"],
       isApiProduct: false,
     },
     {
@@ -275,11 +301,13 @@ const ProductsPage = () => {
       name: "Electrical Contact Cleaner Spray",
       category: "Aerosols",
       image: img14,
+      rating: 4.3,
       description:
         "Electrical Contact Cleaner Spray is a specialized aerosol cleaner designed to remove dirt, grease, and oxidation from electrical contacts and connections. It ensures optimal conductivity and prevents electrical failures caused by contamination.",
       specifications: [
         "Safe for use on plastics and rubber",
       ],
+      features: ["Biodegradable"],
       isApiProduct: false,
     },
     {
@@ -287,8 +315,10 @@ const ProductsPage = () => {
       name: "PCB Card Coating Spray",
       category: "Aerosols",
       image: img15,
+      rating: 4.4,
       description:
         "PCB Card Coating Spray is a fast-drying, transparent protective conformal coating designed to shield printed circuit boards (PCBs) and electronic components from moisture, corrosion, dust, and environmental contaminants. It enhances reliability and extends the life of electronic assemblies.",
+      features: ["Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -296,8 +326,10 @@ const ProductsPage = () => {
       name: "Rust Penetrate Spray",
       category: "Aerosols",
       image: img16,
+      rating: 4.6,
       description:
         "Rust Penetrate Spray is a powerful penetrating oil designed to loosen rusted or corroded parts, making it easier to disassemble machinery, tools, and equipment. It provides excellent lubrication and protection against further rust and corrosion.",
+      features: ["High Temperature Resistant"],
       isApiProduct: false,
     },
     {
@@ -305,8 +337,10 @@ const ProductsPage = () => {
       name: "Engine Oil Turbo-X 15W40 CI4 Plus",
       category: "engine-oil",
       image: img17,
+      rating: 4.8,
       description:
         "Engine Oil Turbo-X 15W40 CI4 Plus is a high-performance, multi-grade engine oil designed for use in turbocharged and naturally aspirated diesel engines. It provides excellent wear protection, thermal stability, and cleanliness, ensuring optimal engine performance and longevity.",
+      features: ["Synthetic Formula", "High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -314,8 +348,10 @@ const ProductsPage = () => {
       name: "GearDrive EP 100",
       category: "Gear Oil",
       image: img18,
+      rating: 4.5,
       description:
         "GearDrive EP 100 is a high-performance gear oil formulated to provide superior lubrication and protection for various types of gear systems. It is designed to withstand extreme pressure and temperature conditions, ensuring smooth operation and extended service life of gears.",
+      features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -323,8 +359,10 @@ const ProductsPage = () => {
       name: "GearDrive EP 150",
       category: "Gear Oil",
       image: img19,
+      rating: 4.4,
       description:
         "GearDrive EP 150 is a high-performance gear oil formulated to provide superior lubrication and protection for various types of gear systems. It is designed to withstand extreme pressure and temperature conditions, ensuring smooth operation and extended service life of gears.",
+      features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -332,48 +370,60 @@ const ProductsPage = () => {
       name: "GearDrive EP 220",
       category: "Gear Oil",
       image: img20,
+      rating: 4.6,
       description:
         "GearDrive EP 220 is a high-performance gear oil formulated to provide superior lubrication and protection for various types of gear systems. It is designed to withstand extreme pressure and temperature conditions, ensuring smooth operation and extended service life of gears.",
+      features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },{
       id: "21",
       name: "GearDrive EP 320",
       category: "Gear Oil",
       image: img21,
+      rating: 4.7,
       description:
         "GearDrive EP 320 is a high-performance gear oil formulated to provide superior lubrication and protection for various types of gear systems. It is designed to withstand extreme pressure and temperature conditions, ensuring smooth operation and extended service life of gears.",
+      features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },{
       id: "22",
       name: "GearDrive EP 460",
       category: "Gear Oil",
       image: img22,
+      rating: 4.5,
       description:
         "GearDrive EP 460 is a high-performance gear oil formulated to provide superior lubrication and protection for various types of gear systems. It is designed to withstand extreme pressure and temperature conditions, ensuring smooth operation and extended service life of gears.",
+      features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },{
       id: "23",
       name: "GearDrive EP 680",
       category: "Gear Oil",
       image: img23,
+      rating: 4.8,
       description:
         "GearDrive EP 680 is a high-performance gear oil formulated to provide superior lubrication and protection for various types of gear systems. It is designed to withstand extreme pressure and temperature conditions, ensuring smooth operation and extended service life of gears.",
+      features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },{
       id: "24",
       name: "Geardrive Synth EP 220",
       category: "Gear Oil",
       image: img24,
+      rating: 4.9,
       description:
         "Geardrive Synth EP 220 is a synthetic gear oil designed for high-performance applications. It provides excellent lubrication and protection for gear systems operating under extreme pressure and temperature conditions, ensuring smooth operation and extended service life.",
+      features: ["Synthetic Formula", "High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },{
       id: "25",
       name: "Geardrive Synth EP 320",
       category: "Gear Oil",
       image: img25,
+      rating: 4.8,
       description:
         "Geardrive Synth EP 320 is a synthetic gear oil designed for high-performance applications. It provides excellent lubrication and protection for gear systems operating under extreme pressure and temperature conditions, ensuring smooth operation and extended service life.",
+      features: ["Synthetic Formula", "High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -381,8 +431,10 @@ const ProductsPage = () => {
       name: "Geardrive Synth PG 220",
       category: "Gear Oil",
       image: img26,
+      rating: 4.7,
       description:
         "Geardrive Synth PG 220 is a synthetic gear oil designed for high-performance applications. It provides excellent lubrication and protection for gear systems operating under extreme pressure and temperature conditions, ensuring smooth operation and extended service life.",
+      features: ["Synthetic Formula", "Biodegradable", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -390,8 +442,10 @@ const ProductsPage = () => {
       name: "Geardrive Synth PG 320",
       category: "Gear Oil",
       image: img27,
+      rating: 4.6,
       description:
         "Geardrive Synth PG 320 is a synthetic gear oil designed for high-performance applications. It provides excellent lubrication and protection for gear systems operating under extreme pressure and temperature conditions, ensuring smooth operation and extended service life.",
+      features: ["Synthetic Formula", "Biodegradable", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -399,8 +453,10 @@ const ProductsPage = () => {
       name: "Lithomax EP 0",
       category: "Grease",
       image: img28,
+      rating: 4.4,
       description:
         "Lithomax EP 0 is a high-performance lithium-based grease designed for use in various industrial and automotive applications. It provides excellent lubrication, corrosion protection, and resistance to water washout, ensuring optimal performance in demanding conditions.",
+      features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -408,8 +464,10 @@ const ProductsPage = () => {
       name: "Lithomax EP 00",
       category: "Grease",
       image: img29,
+      rating: 4.3,
       description:
         "Lithomax EP 00 is a high-performance lithium-based grease designed for use in various industrial and automotive applications. It provides excellent lubrication, corrosion protection, and resistance to water washout, ensuring optimal performance in demanding conditions.",
+      features: ["Biodegradable", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -417,8 +475,10 @@ const ProductsPage = () => {
       name: "Lithomax EP 1",
       category: "Grease",
       image: img30,
+      rating: 4.5,
       description:
         "lithomax EP 1 is a high-performance lithium-based grease designed for use in various industrial and automotive applications. It provides excellent lubrication, corrosion protection, and resistance to water washout, ensuring optimal performance in demanding conditions.",
+      features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -426,8 +486,10 @@ const ProductsPage = () => {
       name: "Lithomax EP 3",
       category: "Grease",
       image: img31,
+      rating: 4.6,
       description:
         "Lithomax EP 3 is a high-performance lithium-based grease designed for use in various industrial and automotive applications. It provides excellent lubrication, corrosion protection, and resistance to water washout, ensuring optimal performance in demanding conditions.",
+      features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
@@ -435,8 +497,10 @@ const ProductsPage = () => {
       name: "Sulphocal 460",
       category: "Grease",
       image: img32,
+      rating: 4.7,
       description:
         "Sulphocal 460 is a high-performance calcium sulphonate complex grease designed for use in heavy-duty applications. It provides excellent lubrication, corrosion protection, and resistance to water washout, ensuring optimal performance in demanding conditions.",
+      features: ["Biodegradable", "High Temperature Resistant"],
       isApiProduct: false,
     },
   ];
@@ -483,8 +547,9 @@ const ProductsPage = () => {
       name: "Hydromax",
       icon: <Factory className="h-4 w-4" />,
     },
-    { id: "gear-oil", name: "Gear Oil", icon: <Wrench className="h-4 w-4" /> },
+    { id: "Gear Oil", name: "Gear Oil", icon: <Wrench className="h-4 w-4" /> },
     { id: "Grease", name: "Grease", icon: <Droplets className="h-4 w-4" /> },
+    { id: "Aerosols", name: "Aerosols", icon: <Beaker className="h-4 w-4" /> },
     { id: "api-product", name: "Custom Products", icon: <Beaker className="h-4 w-4" /> },
   ];
 
@@ -496,18 +561,25 @@ const ProductsPage = () => {
     );
   };
 
+  // FIXED FILTERING LOGIC
   const filteredProducts = allProducts
-    .filter(
-      (product) =>
-        (selectedCategory === "all" || product.category === selectedCategory) &&
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (selectedFeatures.length === 0 ||
-          selectedFeatures.some((feature) =>
-            product.features?.includes(
-              (lubricantFeatures.find((f) => f.id === feature) || {}).name || ""
-            )
-          ))
-    )
+    .filter((product) => {
+      // Category filter
+      const categoryMatch = selectedCategory === "all" || product.category === selectedCategory;
+      
+      // Search filter
+      const searchMatch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      // Features filter - FIXED LOGIC
+      const featuresMatch = selectedFeatures.length === 0 || 
+        selectedFeatures.some((featureId) => {
+          const featureName = lubricantFeatures.find(f => f.id === featureId)?.name;
+          return product.features && Array.isArray(product.features) && 
+                 product.features.includes(featureName);
+        });
+
+      return categoryMatch && searchMatch && featuresMatch;
+    })
     .sort((a, b) => {
       if (sortBy === "name") return a.name.localeCompare(b.name);
       if (sortBy === "rating") return (b.rating || 0) - (a.rating || 0);
@@ -596,6 +668,7 @@ const ProductsPage = () => {
               >
                 <option value="name">Sort by Name</option>
                 <option value="rating">Sort by Rating</option>
+                <option value="category">Sort by Category</option>
               </select>
             </div>
           </div>
@@ -618,8 +691,9 @@ const ProductsPage = () => {
                   <div className="flex-1">
                     <label
                       htmlFor={feature.id}
-                      className="text-sm font-medium text-gray-900 cursor-pointer"
+                      className="text-sm font-medium text-gray-900 cursor-pointer flex items-center gap-2"
                     >
+                      {feature.icon}
                       {feature.name}
                     </label>
                     <p className="text-xs text-gray-600 mt-1">
@@ -666,16 +740,27 @@ const ProductsPage = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="flex flex-col grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredProducts.map((product) => (
             <div
               key={product.id}
-              className="rounded-3xl bg-white shadow-md p-5 flex flex-col justify-between"
+              className="rounded-3xl bg-white shadow-md p-5 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300"
             >
+              {/* Product Image */}
+              <div className="mb-4 flex justify-center">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="h-32 w-32 object-cover rounded-lg"
+                  onError={(e) => {
+                    e.target.src = img1;
+                  }}
+                />
+              </div>
 
               {/* Product Name & Description */}
               <div className="mb-4">
-                <h3 className="text-base sm:text-xl md:text-3xl lg:text-3xl xl:text-4xl font-semibold text-gray-900">
+                <h3 className="text-base sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl font-semibold text-gray-900">
                   {product.name}
                   {product.isApiProduct && (
                     <span className="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -683,9 +768,49 @@ const ProductsPage = () => {
                     </span>
                   )}
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-gray-600 mt-1 line-clamp-3">
                   {product.description}
                 </p>
+                
+                {/* Rating */}
+                {product.rating && (
+                  <div className="flex items-center mt-2">
+                    <div className="flex mr-2">
+                      {renderStars(Math.floor(product.rating))}
+                    </div>
+                    <span className="text-sm text-gray-600">
+                      ({product.rating})
+                    </span>
+                  </div>
+                )}
+
+                {/* Category Badge */}
+                <div className="mt-2">
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                    {product.category}
+                  </span>
+                </div>
+
+                {/* Features */}
+                {product.features && product.features.length > 0 && (
+                  <div className="mt-2">
+                    <div className="flex flex-wrap gap-1">
+                      {product.features.slice(0, 2).map((feature, idx) => (
+                        <span
+                          key={idx}
+                          className="inline-flex items-center px-1 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                      {product.features.length > 2 && (
+                        <span className="text-xs text-gray-500">
+                          +{product.features.length - 2} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* View Details Button */}
@@ -739,6 +864,13 @@ const ProductsPage = () => {
                   border-color: #666666;
                   background: #292929;
                 }
+
+                .line-clamp-3 {
+                  display: -webkit-box;
+                  -webkit-line-clamp: 3;
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;
+                }
               `}</style>
             </div>
           ))}
@@ -763,7 +895,7 @@ const ProductsPage = () => {
               >
                 <button
                   onClick={handleCloseModal}
-                  className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-lg"
+                  className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-lg z-10"
                 >
                   ✕
                 </button>
@@ -781,40 +913,61 @@ const ProductsPage = () => {
                     <h2 className="text-2xl font-bold mb-2">
                       {selectedProduct.name}
                     </h2>
+                    
+                    {/* Rating in modal */}
+                    {selectedProduct.rating && (
+                      <div className="flex items-center mb-2">
+                        <div className="flex mr-2">
+                          {renderStars(Math.floor(selectedProduct.rating))}
+                        </div>
+                        <span className="text-sm text-gray-600">
+                          ({selectedProduct.rating})
+                        </span>
+                      </div>
+                    )}
+
                     <p className="text-gray-700 mb-4">
                       {selectedProduct.description}
                     </p>
 
                     {selectedProduct.viscosity && (
-                      <p>
+                      <p className="mb-2">
                         <strong>Viscosity:</strong> {selectedProduct.viscosity}
                       </p>
                     )}
                     {selectedProduct.volume && (
-                      <p>
+                      <p className="mb-2">
                         <strong>Available Volumes:</strong> {selectedProduct.volume}
                       </p>
                     )}
 
                     {selectedProduct.specifications && (
                       <div className="mt-4">
-                        <h4 className="font-semibold mb-1">Specifications:</h4>
-                        <ul className="list-disc list-inside text-sm text-gray-700">
-                          {Object.entries(selectedProduct.specifications).map(
-                            ([key, value]) => (
-                              <li key={key}>
-                                <strong className="capitalize">{key.replace(/([A-Z])/g, ' $1')}:</strong>{" "}
-                                {Array.isArray(value) ? value.join(", ") : value}
-                              </li>
-                            )
-                          )}
-                        </ul>
+                        <h4 className="font-semibold mb-2">Specifications:</h4>
+                        {Array.isArray(selectedProduct.specifications) ? (
+                          <ul className="list-disc list-inside text-sm text-gray-700">
+                            {selectedProduct.specifications.map((spec, idx) => (
+                              <li key={idx}>{spec}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <ul className="list-disc list-inside text-sm text-gray-700">
+                            {Object.entries(selectedProduct.specifications).map(
+                              ([key, value]) => (
+                                <li key={key}>
+                                  <strong className="capitalize">{key.replace(/([A-Z])/g, ' $1')}:</strong>{" "}
+                                  {Array.isArray(value) ? value.join(", ") : value}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        )}
                       </div>
                     )}
 
                     {selectedProduct.features && selectedProduct.features.length > 0 && (
                       <div className="mt-4">
-                        <h4 className="font-semibold mb-1">Features:</h4>
+                        <h4 className="font-semibold mb-2">Features:</h4>
                         <ul className="list-disc list-inside text-sm text-gray-700">
                           {selectedProduct.features.map((feature, idx) => (
                             <li key={idx}>{feature}</li>
@@ -825,7 +978,7 @@ const ProductsPage = () => {
 
                     {selectedProduct.certifications && selectedProduct.certifications.length > 0 && (
                       <div className="mt-4">
-                        <h4 className="font-semibold mb-1">Certifications:</h4>
+                        <h4 className="font-semibold mb-2">Certifications:</h4>
                         <ul className="list-disc list-inside text-sm text-gray-700">
                           {selectedProduct.certifications.map((cert, idx) => (
                             <li key={idx}>{cert}</li>
