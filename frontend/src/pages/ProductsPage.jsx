@@ -43,10 +43,10 @@ import img24 from "../img/Gear Oil series/Geardrive Synth EP 220.png";
 import img25 from "../img/Gear Oil series/Geardrive Synth EP 320.png";
 import img26 from "../img/Gear Oil series/Geardrive Synth PG 220.png";
 import img27 from "../img/Gear Oil series/Geardrive Synth PG 320.png";
-import img28 from "../img/Greases/Lithomax EP 0.png";
-import img29 from "../img/Greases/Lithomax EP 00.png";
-import img30 from "../img/Greases/Lithomax EP 1.png";
-import img31 from "../img/Greases/Lithomax EP 3.png";
+import img28 from "../img/Greases/Lithomax Ep 0.png";
+import img29 from "../img/Greases/Lithomax Ep 00.png";
+import img30 from "../img/Greases/Lithomax Ep 1.png";
+import img31 from "../img/Greases/Lithomax Ep 3.png";
 import img32 from "../img/Greases/SULPHOCAL 460.png";
 
 const ProductsPage = () => {
