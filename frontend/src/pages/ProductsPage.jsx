@@ -24,7 +24,7 @@ import img7 from "../img/Greases/polyplex HT 460.png";
 import img8 from "../img/Greases/Spinplex 22.png";
 import img1 from "../img/Hydromax Series/Hydromax HVI 46.png";
 import img2 from "../img/Hydromax Series/Hydromax AW 68.png";
-import img9 from "../img/Hydromax Series/Hydromax hlpd 68.png";
+import img9 from "../img/Hydromax Series/Hydromax HLPD 68.png";
 import img10 from "../img/Hydromax Series/Hydromax HLPD 46.png";
 import img11 from "../img/Hydromax Series/Hydromax AW 32.png";
 import img12 from "../img/Hydromax Series/Hydromax AW 46.png";
