@@ -178,15 +178,6 @@ const ContactPage = () => {
                   </div>
                 ))}
               </div>
-
-              {/* Emergency Contact */}
-              <div className="mt-8 p-4 bg-red-50 rounded-lg border border-red-200">
-                <h3 className="text-lg font-semibold text-red-900 mb-2">Emergency Support</h3>
-                <p className="text-red-700 text-sm mb-2">
-                  For urgent technical support outside business hours:
-                </p>
-                <p className="text-red-800 font-semibold">+1 (555) 911-XXXX</p>
-              </div>
             </div>
           </div>
 

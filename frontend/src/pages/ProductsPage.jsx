@@ -508,32 +508,6 @@ const ProductsPage = () => {
   // Combine hardcoded products with API products
   const allProducts = [...hardcodedProducts, ...apiProducts];
 
-  const lubricantFeatures = [
-    {
-      id: "synthetic",
-      name: "Synthetic Formula",
-      description: "Advanced synthetic lubricants...",
-      icon: <Beaker className="h-4 w-4" />,
-    },
-    {
-      id: "biodegradable",
-      name: "Biodegradable",
-      description: "Environmentally friendly lubricants...",
-      icon: <Shield className="h-4 w-4" />,
-    },
-    {
-      id: "high-temp",
-      name: "High Temperature Resistant",
-      description: "Formulated to withstand extreme heat...",
-      icon: <Thermometer className="h-4 w-4" />,
-    },
-    {
-      id: "long-life",
-      name: "Extended Service Life",
-      description: "Long-lasting formulation...",
-      icon: <Clock className="h-4 w-4" />,
-    },
-  ];
 
   const categories = [
     { id: "all", name: "All Products", icon: <Droplets className="h-4 w-4" /> },
@@ -553,13 +527,7 @@ const ProductsPage = () => {
     { id: "api-product", name: "Custom Products", icon: <Beaker className="h-4 w-4" /> },
   ];
 
-  const handleFeatureChange = (featureId) => {
-    setSelectedFeatures((prev) =>
-      prev.includes(featureId)
-        ? prev.filter((id) => id !== featureId)
-        : [...prev, featureId]
-    );
-  };
+
 
   // FIXED FILTERING LOGIC
   const filteredProducts = allProducts
@@ -583,7 +551,6 @@ const ProductsPage = () => {
     .sort((a, b) => {
       if (sortBy === "name") return a.name.localeCompare(b.name);
       if (sortBy === "rating") return (b.rating || 0) - (a.rating || 0);
-      if (sortBy === "category") return a.category.localeCompare(b.category);
       return 0;
     });
 
@@ -667,7 +634,6 @@ const ProductsPage = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="name">Sort by Name</option>
-                <option value="rating">Sort by Rating</option>
                 <option value="category">Sort by Category</option>
               </select>
             </div>
@@ -675,34 +641,6 @@ const ProductsPage = () => {
 
           {/* Lubricant Features Checkboxes */}
           <div className="border-t pt-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Lubricant Features
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {lubricantFeatures.map((feature) => (
-                <div key={feature.id} className="flex items-start space-x-3">
-                  <input
-                    type="checkbox"
-                    id={feature.id}
-                    checked={selectedFeatures.includes(feature.id)}
-                    onChange={() => handleFeatureChange(feature.id)}
-                    className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <div className="flex-1">
-                    <label
-                      htmlFor={feature.id}
-                      className="text-sm font-medium text-gray-900 cursor-pointer flex items-center gap-2"
-                    >
-                      {feature.icon}
-                      {feature.name}
-                    </label>
-                    <p className="text-xs text-gray-600 mt-1">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
 
             {selectedFeatures.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
@@ -772,45 +710,6 @@ const ProductsPage = () => {
                   {product.description}
                 </p>
                 
-                {/* Rating */}
-                {product.rating && (
-                  <div className="flex items-center mt-2">
-                    <div className="flex mr-2">
-                      {renderStars(Math.floor(product.rating))}
-                    </div>
-                    <span className="text-sm text-gray-600">
-                      ({product.rating})
-                    </span>
-                  </div>
-                )}
-
-                {/* Category Badge */}
-                <div className="mt-2">
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                    {product.category}
-                  </span>
-                </div>
-
-                {/* Features */}
-                {product.features && product.features.length > 0 && (
-                  <div className="mt-2">
-                    <div className="flex flex-wrap gap-1">
-                      {product.features.slice(0, 2).map((feature, idx) => (
-                        <span
-                          key={idx}
-                          className="inline-flex items-center px-1 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700"
-                        >
-                          {feature}
-                        </span>
-                      ))}
-                      {product.features.length > 2 && (
-                        <span className="text-xs text-gray-500">
-                          +{product.features.length - 2} more
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                )}
               </div>
 
               {/* View Details Button */}
@@ -913,18 +812,7 @@ const ProductsPage = () => {
                     <h2 className="text-2xl font-bold mb-2">
                       {selectedProduct.name}
                     </h2>
-                    
-                    {/* Rating in modal */}
-                    {selectedProduct.rating && (
-                      <div className="flex items-center mb-2">
-                        <div className="flex mr-2">
-                          {renderStars(Math.floor(selectedProduct.rating))}
-                        </div>
-                        <span className="text-sm text-gray-600">
-                          ({selectedProduct.rating})
-                        </span>
-                      </div>
-                    )}
+                  
 
                     <p className="text-gray-700 mb-4">
                       {selectedProduct.description}
@@ -965,16 +853,7 @@ const ProductsPage = () => {
                       </div>
                     )}
 
-                    {selectedProduct.features && selectedProduct.features.length > 0 && (
-                      <div className="mt-4">
-                        <h4 className="font-semibold mb-2">Features:</h4>
-                        <ul className="list-disc list-inside text-sm text-gray-700">
-                          {selectedProduct.features.map((feature, idx) => (
-                            <li key={idx}>{feature}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+
 
                     {selectedProduct.certifications && selectedProduct.certifications.length > 0 && (
                       <div className="mt-4">
