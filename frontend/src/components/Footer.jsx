@@ -15,11 +15,15 @@ const Footer = () => {
             <Link to={'/products'}><h4 className="text-lg font-semibold mb-4">Products</h4></Link>
             
             <ul className="space-y-2 text-gray-400">
-              <li>Engine Oil</li>
-              <li>Gear Oil</li>
-              <li>Hydraulic Oil</li>
-              <li>Greases</li>
-              <li>Aerosols</li>
+              <li>Hydromax AW series 
+</li>
+              <li>Hydromax HVI series 
+</li>
+              <li>Polyplex HT 460 
+</li>
+              <li>Lithomax EP2 Grease 
+</li>
+              <li>Lithplex 220 Blue</li>
             </ul>
           </div>
           <div>
