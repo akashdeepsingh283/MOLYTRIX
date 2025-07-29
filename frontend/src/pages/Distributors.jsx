@@ -31,7 +31,7 @@ const getAuthToken = () => {
 
 const isAdminUser = () => {
   const user = getCurrentUser();
-  return user?.email === 'akash@gmail.com';
+  return user?.email === 'molytrixpetrochem25@gmail.com';
 };
 
 const Alert = ({ children, variant = 'default', onClose }) => {

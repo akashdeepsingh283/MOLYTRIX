@@ -8,7 +8,7 @@ const path = require('path');
 require('dotenv').config();
 const nodemailer = require('nodemailer'); 
 
-const ADMIN_EMAIL = "akash@gmail.com"; // ✅ Set your admin email here
+const ADMIN_EMAIL = "molytrixpetrochem25@gmail.com"
 
 
 const User = require('./models/user'); 

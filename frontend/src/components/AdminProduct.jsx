@@ -32,7 +32,7 @@ const getAuthToken = () => {
 
 const isAdminUser = () => {
   const user = getCurrentUser();
-  return user?.email === 'akash@gmail.com';
+  return user?.email === 'molytrixpetrochem25@gmail.com';
 };
 
 // Alert Component
@@ -344,7 +344,9 @@ console.log('Submission debug — user:', user);
         <Alert variant="error">
           <div>
             <div className="font-semibold">Access Denied</div>
-            <div className="mt-1">Only admin users (akash@gmail.com) can add products.</div>
+            <div className="mt-1">Only admin users (molytrixpetrochem25@gmail.com 
+
+) can add products.</div>
             <div className="mt-2 text-sm">Current user: {user.email}</div>
           </div>
         </Alert>
