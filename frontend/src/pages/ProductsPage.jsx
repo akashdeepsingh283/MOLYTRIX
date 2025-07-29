@@ -168,7 +168,7 @@ const ProductsPage = () => {
       image: img3,
       rating: 4.7,
       description:
-        "This product is specially formulated to lubricate all sorts of equipment and mechanisms. The grease will perform excellent for on- and off- road equipment, manufacturing, agriculture, mining, marine, forestry and general-purpose applications.",
+"This product is a range of lithium soap thickened greases available in different NLGI classes. The product is a general-purpose product designed to perform in a wide variety of application requiring a grease with EP properties and load-carrying capacity. Contains an extreme pressure additive technology which has a low impact on the environment.",
       specifications: [
         "DIN 51502", "DIN 51825 KP N-30", "ISO 6743/9 L-XCDHB",
       ],
@@ -486,7 +486,7 @@ const ProductsPage = () => {
     },
     {
       id: "Hydromax",
-      name: "Hydromax",
+      name: "Hydraulic Oil",
       icon: <Factory className="h-4 w-4" />,
     },
     { id: "Gear Oil", name: "Gear Oil", icon: <Wrench className="h-4 w-4" /> },
