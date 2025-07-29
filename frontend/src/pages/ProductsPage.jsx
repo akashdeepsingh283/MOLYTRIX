@@ -672,7 +672,7 @@ const ProductsPage = () => {
                  product.features.includes(featureName);
         });
 
-      return categoryMatch && searchMatch && featuresMatch;
+      return categoryMatch && searchMatch;
     })
     .sort((a, b) => {
       if (sortBy === "name") return a.name.localeCompare(b.name);
@@ -767,20 +767,6 @@ return (
 
           {/* Lubricant Features Checkboxes */}
           <div className="border-t pt-6">
-            <h4 className="font-semibold mb-3 text-gray-700">Filter by Features:</h4>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {lubricantFeatures.map((feature) => (
-                <label key={feature.id} className="flex items-center space-x-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={selectedFeatures.includes(feature.id)}
-                    onChange={() => handleFeatureChange(feature.id)}
-                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                  />
-                  <span className="text-sm text-gray-700">{feature.name}</span>
-                </label>
-              ))}
-            </div>
 
             {selectedFeatures.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
