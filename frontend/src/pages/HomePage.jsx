@@ -3,6 +3,7 @@ import { Cover } from "../components/ui/cover";
 import { Link } from 'react-router-dom';
 import img from '../img/home1.png';
 import DistributorTable from '../pages/Distributors';
+import InsightButton from '../components/ui/insightsbutton';
 import { 
   Shield, 
   Truck, 
@@ -13,9 +14,9 @@ import {
   MapPin,
   CheckCircle
 } from 'lucide-react';
-
 const HomePage = () => {
   return (
+
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-[#0f0f0f] via-[#1a1a2e] to-[#3a3a55] text-white">
@@ -270,6 +271,18 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      <section>
+      
+      {/**/}
+      <div className="relative min-h-screen">
+      {/* Your existing homepage content */}
+
+      {/* Fixed Positioned Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <InsightButton />
+      </div>
+    </div>
+    </section>
 
       {/* Distributor Section */}
  <div>
