@@ -207,7 +207,7 @@ const ProductsPage = () => {
       image: img6,
       rating: 4.4,
       description:
-        "This product is specially formulated to lubricate all sorts of equipment and mechanisms. The grease will perform excellent for on- and off- road equipment, manufacturing, agriculture, mining, marine, forestry and general-purpose applications.",
+"High performance multipurpose lubricating grease specially designed for operating in a wide temperatures range. Formulated with innovative organic thickeners and provided with a high chemical and thermal stability. In combination with the high viscosity synthetic base oil this product possesses outstanding lubricating capacity and resistance to aging.",
       specifications: [
         "Medium and high speed bearings", "Bearings in cold environments and cooling systems", "Electric motor bearings", "Fan bearings, exhausters and pumps", "Oven wagon and drying tunnel bearings", "Bearings in conveyor belts", "Bearings and bolts in chains operated under strong temperatures variations", "Plain bearings and joints in plastic-plastic and plastic-metal contacts","Lubrication of wire guides, plastic bearings and slides",
       ],
