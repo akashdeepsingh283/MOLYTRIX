@@ -117,16 +117,100 @@ const ProductsPage = () => {
     fetchProducts();
   };
 
-  // Hardcoded products (your existing ones) - FIXED CATEGORIES
+  // Updated lubricant features
+  const lubricantFeatures = [
+    { id: "high-temp", name: "High Temperature Resistant" },
+    { id: "extended-life", name: "Extended Service Life" },
+    { id: "synthetic", name: "Synthetic Formula" },
+    { id: "biodegradable", name: "Biodegradable" },
+    { id: "water-resistant", name: "Water Resistant" },
+    { id: "anti-wear", name: "Anti-Wear Protection" },
+    { id: "extreme-pressure", name: "Extreme Pressure" },
+  ];
+
+  const handleFeatureChange = (featureId) => {
+    setSelectedFeatures(prev => 
+      prev.includes(featureId) 
+        ? prev.filter(id => id !== featureId)
+        : [...prev, featureId]
+    );
+  };
+
+  // Updated hardcoded products with corrected information and new categories
   const hardcodedProducts = [
+    // Hydromax AW Series
+    {
+      id: "2",
+      name: "Hydromax AW 68",
+      category: "hydromax-aw",
+      image: img2,
+      rating: 4.3,
+      description:
+        "High performance anti-wear hydraulic fluid formulated with premium base oils and advanced additive technology. Provides excellent protection against wear, oxidation, and foam formation in hydraulic systems.",
+      specifications: [
+        "Vickers I-286-S & M-2950-S",
+        "AFNOR NF E 48-603 HM",
+        "DIN 51 524 PART 2 (HLP)",
+        "VDMA 24318",
+        "US STEEL 126/127",
+        "Thyssen TH-N-256132",
+        "FZG A/8.3/90 > 12 (ISO VG 46 and higher)",
+        "FZG A/8.3/90 = 12 (ISO VG 15, 22 and 32)",
+        "CINCINATTI MILACRON P68/P69/P70 (ISO VG 32-68)"
+      ],
+      features: ["Anti-Wear Protection", "Extended Service Life"],
+      isApiProduct: false,
+    },
+    {
+      id: "11",
+      name: "Hydromax AW 32",
+      category: "hydromax-aw",
+      image: img11,
+      rating: 4.7,
+      description:
+        "Premium anti-wear hydraulic fluid designed for mobile and stationary hydraulic systems. Excellent thermal stability and oxidation resistance ensure reliable performance under demanding conditions.",
+      specifications: [
+        "Vickers I-286-S & M-2950-S",
+        "AFNOR NF E 48-603 HM",
+        "DIN 51 524 PART 2 (HLP)",
+        "VDMA 24318",
+        "US STEEL 126/127",
+        "ISO 11158 HM",
+        "FZG A/8.3/90 = 12"
+      ],
+      features: ["Anti-Wear Protection", "Extended Service Life"],
+      isApiProduct: false,
+    },
+    {
+      id: "12",
+      name: "Hydromax AW 46",
+      category: "hydromax-aw",
+      image: img12,
+      rating: 4.5,
+      description:
+        "High-quality anti-wear hydraulic oil with excellent shear stability and thermal properties. Formulated to provide superior protection for hydraulic pumps, motors, and valves.",
+      specifications: [
+        "Vickers I-286-S & M-2950-S",
+        "AFNOR NF E 48-603 HM",
+        "DIN 51 524 PART 2 (HLP)",
+        "VDMA 24318",
+        "US STEEL 126/127",
+        "ISO 11158 HM",
+        "Denison HF-0, HF-1, HF-2"
+      ],
+      features: ["Anti-Wear Protection", "Extended Service Life"],
+      isApiProduct: false,
+    },
+
+    // Hydromax HVI Series
     {
       id: "1",
-      name: "Hydroprime HVI 46",
-      category: "Hydromax",
+      name: "Hydromax HVI 46",
+      category: "hydromax-hvi",
       image: img1,
       rating: 4.5,
       description:
-      "High performance hydraulic fluid, based on the latest base oil and additive technology. The use of an special additive pack warrants optimal performance and a long service life.",
+        "High Viscosity Index hydraulic fluid with exceptional thermal stability and low temperature fluidity. Engineered for applications requiring wide temperature operation and extended service intervals.",
       specifications: [
         "Vickers I-286-S & M-2950-S",
         "AFNOR NF E 48-603 HL",
@@ -138,172 +222,239 @@ const ProductsPage = () => {
         "Thyssen HT-N-256132",
         "US STEEL 126/127",
       ],
-      features: ["High Temperature Resistant", "Extended Service Life"],
+      features: ["High Temperature Resistant", "Extended Service Life", "Water Resistant"],
       isApiProduct: false,
     },
     {
-      id: "2",
-      name: "Hydroprime AW 68",
-      category: "Hydromax",
-      image: img2,
-      rating: 4.3,
+      id: "9",
+      name: "Hydromax HVI 68",
+      category: "hydromax-hvi",
+      image: img9,
+      rating: 4.6,
       description:
-        "High performance hydraulic fluid, based on the latest base oil and additive technology. The use of an special additive pack warrants optimal performance and a long service life.",
+        "Premium High Viscosity Index hydraulic oil offering superior performance across extreme temperature ranges. Features advanced additive package for maximum equipment protection and reliability.",
       specifications: [
-        "Vickers 1-286-S & M-2950-S",
-        "AFNOR NF E 48-603 HM",
-        "DIN 51 524 PART 2 (HLP)",
+        "Vickers I-286-S & M-2950-S",
+        "AFNOR NF E 48-603 HL",
+        "DIN 51 524 PART 3 (HVLP)",
+        "ISO 11158 HV",
         "VDMA 24318",
-        "US STEEL 126/127",
-        "Thyssen TH-N-256132",
-        "FZG A/8.3/90 > 12 (ISO VG 46 and higher)",
-        "FZG A/8.3/90 = 12 (ISO VG 15, 22 and 32)",
-        "CINCINATTI MILACRON P68/P69/P70 (ISO VG 32-68)"
+        "FZG A/8.3/90 > 12"
       ],
-      features: ["Synthetic Formula", "Extended Service Life"],
+      features: ["High Temperature Resistant", "Extended Service Life", "Water Resistant"],
       isApiProduct: false,
     },
+
+    // Polyplex HT 460 Series
+    {
+      id: "7",
+      name: "Polyplex HT 460",
+      category: "polyplex-ht",
+      image: img7,
+      rating: 4.5,
+      description:
+        "Advanced high-temperature grease formulated with synthetic base oil and polyurea thickener. Engineered for extreme temperature applications with exceptional thermal stability and long service life.",
+      specifications: [
+        "Operating Temperature: -40°C to +180°C",
+        "NLGI Grade 2",
+        "Drop Point: >250°C",
+        "Base Oil Viscosity @ 40°C: 460 cSt",
+        "Water Resistance: Pass",
+        "Four Ball Weld Load: >400 kg",
+        "Copper Corrosion: 1b max",
+        "Oil Separation @ 100°C: <5%"
+      ],
+      features: ["High Temperature Resistant", "Extended Service Life", "Extreme Pressure"],
+      isApiProduct: false,
+    },
+
+    // Lithomax EP2 Grease Series
     {
       id: "3",
       name: "Lithomax EP 2",
-      category: "Grease",
+      category: "lithomax-ep2",
       image: img3,
       rating: 4.7,
       description:
-        "This product is specially formulated to lubricate all sorts of equipment and mechanisms. The grease will perform excellent for on- and off- road equipment, manufacturing, agriculture, mining, marine, forestry and general-purpose applications.",
+        "Multi-purpose lithium complex grease with extreme pressure additives. Specially formulated for heavy-duty applications in automotive, industrial, and off-road equipment requiring superior load-carrying capacity.",
       specifications: [
-        "DIN 51502", "DIN 51825 KP N-30", "ISO 6743/9 L-XCDHB",
+        "NLGI Grade 2",
+        "Lithium Complex Thickener",
+        "Operating Temperature: -20°C to +150°C",
+        "Drop Point: >250°C",
+        "DIN 51502: K2P-20",
+        "DIN 51825: KP2P-20",
+        "ISO 6743/9: L-XCEEB2",
+        "Four Ball EP Test: Weld Load >315 kg"
       ],
-      features: ["Biodegradable", "High Temperature Resistant"],
+      features: ["Extreme Pressure", "High Temperature Resistant", "Water Resistant"],
       isApiProduct: false,
     },
+    {
+      id: "28",
+      name: "Lithomax EP 0",
+      category: "lithomax-ep2",
+      image: img28,
+      rating: 4.4,
+      description:
+        "Semi-fluid lithium complex grease designed for centralized lubrication systems and applications requiring pumpable consistency with extreme pressure protection.",
+      specifications: [
+        "NLGI Grade 0",
+        "Lithium Complex Thickener",
+        "Operating Temperature: -25°C to +140°C",
+        "Drop Point: >250°C",
+        "DIN 51502: K0P-25"
+      ],
+      features: ["Extreme Pressure", "Extended Service Life"],
+      isApiProduct: false,
+    },
+    {
+      id: "29",
+      name: "Lithomax EP 00",
+      category: "lithomax-ep2",
+      image: img29,
+      rating: 4.3,
+      description:
+        "Very soft lithium complex grease ideal for centralized lubrication systems and sealed-for-life applications requiring fluid-like consistency.",
+      specifications: [
+        "NLGI Grade 00",
+        "Lithium Complex Thickener", 
+        "Operating Temperature: -30°C to +130°C",
+        "Drop Point: >250°C"
+      ],
+      features: ["Extreme Pressure", "Extended Service Life"],
+      isApiProduct: false,
+    },
+    {
+      id: "30",
+      name: "Lithomax EP 1",
+      category: "lithomax-ep2",
+      image: img30,
+      rating: 4.5,
+      description:
+        "Soft lithium complex grease suitable for high-speed bearings and applications where reduced churning and lower operating temperatures are desired.",
+      specifications: [
+        "NLGI Grade 1",
+        "Lithium Complex Thickener",
+        "Operating Temperature: -25°C to +150°C",
+        "Drop Point: >250°C"
+      ],
+      features: ["Extreme Pressure", "High Temperature Resistant"],
+      isApiProduct: false,
+    },
+    {
+      id: "31",
+      name: "Lithomax EP 3",
+      category: "lithomax-ep2",
+      image: img31,
+      rating: 4.6,
+      description:
+        "Heavy-duty lithium complex grease for applications subjected to shock loading, vibration, and extreme pressures. Ideal for chassis lubrication and heavy equipment.",
+      specifications: [
+        "NLGI Grade 3",
+        "Lithium Complex Thickener",
+        "Operating Temperature: -15°C to +150°C",
+        "Drop Point: >250°C"
+      ],
+      features: ["Extreme Pressure", "High Temperature Resistant"],
+      isApiProduct: false,
+    },
+
+    // Lithplex Blue 220 Series
     {
       id: "4",
       name: "Lithplex Blue 220",
-      category: "Grease",
+      category: "lithplex-blue",
       image: img4,
       rating: 4.6,
       description:
-        "This product is a modern high performance product setting a new standard for a truly universal grease, suitable for both industrial and automotive ends. It is used in various types of bearing applications, including heavy load conditions and temperature peaks up to 160°C. ",
+        "Premium blue-colored lithium complex grease engineered for universal applications. Features excellent mechanical stability, water resistance, and protection against wear and corrosion in demanding industrial environments.",
       specifications: [
-        "DIN 51502", "DIN 51825 KP2P-30", "ISO 6743/9 L-XCEEB2", "ASTM D-4950 GC/LB",
-            ],
-      features: ["High Temperature Resistant", "Extended Service Life"],
+        "NLGI Grade 2",
+        "Lithium Complex Thickener",
+        "Base Oil Viscosity @ 40°C: 220 cSt",
+        "Operating Temperature: -30°C to +160°C",
+        "Drop Point: >250°C",
+        "DIN 51502: K2P-30",
+        "DIN 51825: KP2P-30",
+        "ISO 6743/9: L-XCEEB2",
+        "ASTM D-4950: GC/LB",
+        "Water Washout @ 79°C: <10%"
+      ],
+      features: ["High Temperature Resistant", "Extended Service Life", "Water Resistant"],
       isApiProduct: false,
     },
+
+    // Other existing products with updated categories
     {
       id: "5",
       name: "Sulphocal 220",
-      category: "Grease",
+      category: "other-products",
       image: img5,
       rating: 4.8,
       description:
-        "This product is a calcium sulphonate complex thickened grease based on mineral oil with a high drop point and high resistance to cold and salt water as well as vapour resistance. The grease is as well provided with superior lubricating and sealing capacity and offers increased load carrying capacity. It offers corrosion protection and excellent water resistance which are essential in wet and corrosive environment.",
+        "Calcium sulphonate complex thickened grease based on mineral oil with high drop point and excellent resistance to water, salt water, and corrosive environments.",
       specifications: [
         "DIN 51502", "DIN 51825 KP2U-30 / OG2U-30", "ISO 6743-9 L-XBFHB2",
       ],
-      features: ["Biodegradable", "High Temperature Resistant"],
+      features: ["Biodegradable", "High Temperature Resistant", "Water Resistant"],
       isApiProduct: false,
     },
     {
       id: "6",
       name: "Polyplex EM 100",
-      category: "Grease",
+      category: "other-products",
       image: img6,
       rating: 4.4,
       description:
-        "This product is specially formulated to lubricate all sorts of equipment and mechanisms. The grease will perform excellent for on- and off- road equipment, manufacturing, agriculture, mining, marine, forestry and general-purpose applications.",
+        "Special synthetic grease formulated for electric motor bearings and applications requiring low noise operation and extended service life.",
       specifications: [
         "Medium and high speed bearings", "Bearings in cold environments and cooling systems", "Electric motor bearings", "Fan bearings, exhausters and pumps", "Oven wagon and drying tunnel bearings", "Bearings in conveyor belts", "Bearings and bolts in chains operated under strong temperatures variations", "Plain bearings and joints in plastic-plastic and plastic-metal contacts","Lubrication of wire guides, plastic bearings and slides",
       ],
       features: ["Synthetic Formula", "Extended Service Life"],
       isApiProduct: false,
-    }, 
-    {
-      id: "7",
-      name: "GREASE POLYPLEX HT 460",
-      category: "Grease",
-      image: img7,
-      rating: 4.5,
-      description:
-        "New technology high efficiency lubricating grease with a high viscosity base oil. It is formulated with a long life organic thickener, highly refined mineral oil and additive package to provide superior anti wear, EP properties and high antioxidant and anticorrosive capacity. The grease is perfectly suitable for bearing lubrication and for mechanisms exposed to the combined action of high temperatures, heavy loads and water action.",
-      features: ["High Temperature Resistant", "Extended Service Life"],
-      isApiProduct: false,
     },
     {
       id: "8",
-      name: "SPINPLEX 22",
-      category: "Grease",
+      name: "Spinplex 22",
+      category: "other-products",
       image: img8,
       rating: 4.3,
       description:
-      "This product is a complex soap thickened synthetic grease. It provides high resistance to oxidation, superior anticorrosive capacity, E.P. characteristics, good adherence to metal and good resistance to water, and resistance to vapour, acid and alkaline solutions.",
+      "Complex soap thickened synthetic grease with high resistance to oxidation, superior anticorrosive capacity, and excellent adhesion properties.",
       features: ["Synthetic Formula", "Biodegradable"],
       isApiProduct: false,
     },
     {
-      id: "9",
-      name: "Hydromax HLPD 68",
-      category: "Hydromax",
-      image: img9,
-      rating: 4.6,
-      description:
-        "High performance hydraulic fluid, based on the latest base oil and additive technology. This product is a so called detergent hydraulic fluid and therefore very suitable where miscibility with water is required. It is formulated using ashless chemistry, is detergent and will keep systems clean while operating.",
-      features: ["Biodegradable", "Extended Service Life"],
-      isApiProduct: false,
-    }, 
-    {
       id: "10",
-      name: "Hydropmax HLPD 46",
-      category: "Hydromax",
+      name: "Hydromax HLPD 46",
+      category: "other-products",
       image: img10,
       rating: 4.4,
       description:
-        "High performance hydraulic fluid, based on the latest base oil and additive technology. This product is a so called detergent hydraulic fluid and therefore very suitable where miscibility with water is required. It is formulated using ashless chemistry, is detergent and will keep systems clean while operating.",
+        "Detergent hydraulic fluid with ashless chemistry, designed for systems requiring miscibility with water and superior cleanliness.",
       features: ["Biodegradable", "Extended Service Life"],
-      isApiProduct: false,
-    },
-    {
-      id: "11",
-      name: "Hydromax AW 32",
-      category: "Hydromax",
-      image: img11,
-      rating: 4.7,
-      description:
-        "High performance hydraulic fluid, based on the latest base oil and additive technology. This product is a so called detergent hydraulic fluid and therefore very suitable where miscibility with water is required. It is formulated using ashless chemistry, is detergent and will keep systems clean while operating.",
-      features: ["Synthetic Formula", "Extended Service Life"],
-      isApiProduct: false,
-    }, 
-    {
-      id: "12",
-      name: "Hydromax AW 46",
-      category: "Hydromax",
-      image: img12,
-      rating: 4.5,
-      description:
-        "High performance hydraulic fluid, based on the latest base oil and additive technology. This product is a so called detergent hydraulic fluid and therefore very suitable where miscibility with water is required. It is formulated using ashless chemistry, is detergent and will keep systems clean while operating.",
-      features: ["Synthetic Formula", "Extended Service Life"],
       isApiProduct: false,
     },
     {
       id: "13",
       name: "Anti Spatter Spray",
-      category: "Aerosols",
+      category: "other-products",
       image: img13,
       rating: 4.2,
       description:
-        "Anti Spatter Spray is a high-performance aerosol formulation designed to prevent welding spatter from adhering to metal surfaces, welding equipment, and nozzles. It ensures cleaner welds and reduces post-welding cleanup, saving time and effort in production.",
+        "High-performance aerosol formulation designed to prevent welding spatter from adhering to metal surfaces and equipment.",
       features: ["Synthetic Formula"],
       isApiProduct: false,
     },
     {
       id: "14",
       name: "Electrical Contact Cleaner Spray",
-      category: "Aerosols",
+      category: "other-products",
       image: img14,
       rating: 4.3,
       description:
-        "Electrical Contact Cleaner Spray is a specialized aerosol cleaner designed to remove dirt, grease, and oxidation from electrical contacts and connections. It ensures optimal conductivity and prevents electrical failures caused by contamination.",
+        "Specialized aerosol cleaner for removing dirt, grease, and oxidation from electrical contacts and connections.",
       specifications: [
         "Safe for use on plastics and rubber",
       ],
@@ -313,194 +464,155 @@ const ProductsPage = () => {
     {
       id: "15",
       name: "PCB Card Coating Spray",
-      category: "Aerosols",
+      category: "other-products",
       image: img15,
       rating: 4.4,
       description:
-        "PCB Card Coating Spray is a fast-drying, transparent protective conformal coating designed to shield printed circuit boards (PCBs) and electronic components from moisture, corrosion, dust, and environmental contaminants. It enhances reliability and extends the life of electronic assemblies.",
+        "Fast-drying, transparent protective conformal coating for printed circuit boards and electronic components.",
       features: ["Extended Service Life"],
       isApiProduct: false,
     },
     {
       id: "16",
       name: "Rust Penetrate Spray",
-      category: "Aerosols",
+      category: "other-products",
       image: img16,
       rating: 4.6,
       description:
-        "Rust Penetrate Spray is a powerful penetrating oil designed to loosen rusted or corroded parts, making it easier to disassemble machinery, tools, and equipment. It provides excellent lubrication and protection against further rust and corrosion.",
+        "Powerful penetrating oil designed to loosen rusted or corroded parts with excellent lubrication properties.",
       features: ["High Temperature Resistant"],
       isApiProduct: false,
     },
     {
       id: "17",
       name: "Engine Oil Turbo-X 15W40 CI4 Plus",
-      category: "engine-oil",
+      category: "other-products",
       image: img17,
       rating: 4.8,
       description:
-        "Engine Oil Turbo-X 15W40 CI4 Plus is a high-performance, multi-grade engine oil designed for use in turbocharged and naturally aspirated diesel engines. It provides excellent wear protection, thermal stability, and cleanliness, ensuring optimal engine performance and longevity.",
+        "High-performance, multi-grade engine oil designed for turbocharged and naturally aspirated diesel engines.",
       features: ["Synthetic Formula", "High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
       id: "18",
       name: "GearDrive EP 100",
-      category: "Gear Oil",
+      category: "other-products",
       image: img18,
       rating: 4.5,
       description:
-        "GearDrive EP 100 is a high-performance gear oil formulated to provide superior lubrication and protection for various types of gear systems. It is designed to withstand extreme pressure and temperature conditions, ensuring smooth operation and extended service life of gears.",
+        "High-performance gear oil formulated to provide superior lubrication and protection for various gear systems.",
       features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
       id: "19",
       name: "GearDrive EP 150",
-      category: "Gear Oil",
+      category: "other-products",
       image: img19,
       rating: 4.4,
       description:
-        "GearDrive EP 150 is a high-performance gear oil formulated to provide superior lubrication and protection for various types of gear systems. It is designed to withstand extreme pressure and temperature conditions, ensuring smooth operation and extended service life of gears.",
+        "High-performance gear oil designed to withstand extreme pressure and temperature conditions.",
       features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
       id: "20",
       name: "GearDrive EP 220",
-      category: "Gear Oil",
+      category: "other-products",
       image: img20,
       rating: 4.6,
       description:
-        "GearDrive EP 220 is a high-performance gear oil formulated to provide superior lubrication and protection for various types of gear systems. It is designed to withstand extreme pressure and temperature conditions, ensuring smooth operation and extended service life of gears.",
+        "Premium gear oil providing superior lubrication and protection for heavy-duty gear applications.",
       features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
-    },{
+    },
+    {
       id: "21",
       name: "GearDrive EP 320",
-      category: "Gear Oil",
+      category: "other-products",
       image: img21,
       rating: 4.7,
       description:
-        "GearDrive EP 320 is a high-performance gear oil formulated to provide superior lubrication and protection for various types of gear systems. It is designed to withstand extreme pressure and temperature conditions, ensuring smooth operation and extended service life of gears.",
+        "Heavy-duty gear oil engineered for extreme pressure conditions and extended service intervals.",
       features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
-    },{
+    },
+    {
       id: "22",
       name: "GearDrive EP 460",
-      category: "Gear Oil",
+      category: "other-products",
       image: img22,
       rating: 4.5,
       description:
-        "GearDrive EP 460 is a high-performance gear oil formulated to provide superior lubrication and protection for various types of gear systems. It is designed to withstand extreme pressure and temperature conditions, ensuring smooth operation and extended service life of gears.",
+        "High-viscosity gear oil for applications requiring superior load-carrying capacity.",
       features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
-    },{
+    },
+    {
       id: "23",
       name: "GearDrive EP 680",
-      category: "Gear Oil",
+      category: "other-products",
       image: img23,
       rating: 4.8,
       description:
-        "GearDrive EP 680 is a high-performance gear oil formulated to provide superior lubrication and protection for various types of gear systems. It is designed to withstand extreme pressure and temperature conditions, ensuring smooth operation and extended service life of gears.",
+        "Extra heavy-duty gear oil designed for the most demanding industrial applications.",
       features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
-    },{
+    },
+    {
       id: "24",
       name: "Geardrive Synth EP 220",
-      category: "Gear Oil",
+      category: "other-products",
       image: img24,
       rating: 4.9,
       description:
-        "Geardrive Synth EP 220 is a synthetic gear oil designed for high-performance applications. It provides excellent lubrication and protection for gear systems operating under extreme pressure and temperature conditions, ensuring smooth operation and extended service life.",
+        "Synthetic gear oil designed for high-performance applications with excellent thermal stability.",
       features: ["Synthetic Formula", "High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
-    },{
+    },
+    {
       id: "25",
       name: "Geardrive Synth EP 320",
-      category: "Gear Oil",
+      category: "other-products",
       image: img25,
       rating: 4.8,
       description:
-        "Geardrive Synth EP 320 is a synthetic gear oil designed for high-performance applications. It provides excellent lubrication and protection for gear systems operating under extreme pressure and temperature conditions, ensuring smooth operation and extended service life.",
+        "Premium synthetic gear oil providing superior protection under extreme operating conditions.",
       features: ["Synthetic Formula", "High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
       id: "26",
       name: "Geardrive Synth PG 220",
-      category: "Gear Oil",
+      category: "other-products",
       image: img26,
       rating: 4.7,
       description:
-        "Geardrive Synth PG 220 is a synthetic gear oil designed for high-performance applications. It provides excellent lubrication and protection for gear systems operating under extreme pressure and temperature conditions, ensuring smooth operation and extended service life.",
+        "Biodegradable synthetic gear oil meeting environmental requirements without compromising performance.",
       features: ["Synthetic Formula", "Biodegradable", "Extended Service Life"],
       isApiProduct: false,
     },
     {
       id: "27",
       name: "Geardrive Synth PG 320",
-      category: "Gear Oil",
+      category: "other-products",
       image: img27,
       rating: 4.6,
       description:
-        "Geardrive Synth PG 320 is a synthetic gear oil designed for high-performance applications. It provides excellent lubrication and protection for gear systems operating under extreme pressure and temperature conditions, ensuring smooth operation and extended service life.",
+        "Environmentally friendly synthetic gear oil with exceptional biodegradability and performance.",
       features: ["Synthetic Formula", "Biodegradable", "Extended Service Life"],
-      isApiProduct: false,
-    },
-    {
-      id: "28",
-      name: "Lithomax EP 0",
-      category: "Grease",
-      image: img28,
-      rating: 4.4,
-      description:
-        "Lithomax EP 0 is a high-performance lithium-based grease designed for use in various industrial and automotive applications. It provides excellent lubrication, corrosion protection, and resistance to water washout, ensuring optimal performance in demanding conditions.",
-      features: ["High Temperature Resistant", "Extended Service Life"],
-      isApiProduct: false,
-    },
-    {
-      id: "29",
-      name: "Lithomax EP 00",
-      category: "Grease",
-      image: img29,
-      rating: 4.3,
-      description:
-        "Lithomax EP 00 is a high-performance lithium-based grease designed for use in various industrial and automotive applications. It provides excellent lubrication, corrosion protection, and resistance to water washout, ensuring optimal performance in demanding conditions.",
-      features: ["Biodegradable", "Extended Service Life"],
-      isApiProduct: false,
-    },
-    {
-      id: "30",
-      name: "Lithomax EP 1",
-      category: "Grease",
-      image: img30,
-      rating: 4.5,
-      description:
-        "lithomax EP 1 is a high-performance lithium-based grease designed for use in various industrial and automotive applications. It provides excellent lubrication, corrosion protection, and resistance to water washout, ensuring optimal performance in demanding conditions.",
-      features: ["High Temperature Resistant", "Extended Service Life"],
-      isApiProduct: false,
-    },
-    {
-      id: "31",
-      name: "Lithomax EP 3",
-      category: "Grease",
-      image: img31,
-      rating: 4.6,
-      description:
-        "Lithomax EP 3 is a high-performance lithium-based grease designed for use in various industrial and automotive applications. It provides excellent lubrication, corrosion protection, and resistance to water washout, ensuring optimal performance in demanding conditions.",
-      features: ["High Temperature Resistant", "Extended Service Life"],
       isApiProduct: false,
     },
     {
       id: "32",
       name: "Sulphocal 460",
-      category: "Grease",
+      category: "other-products",
       image: img32,
       rating: 4.7,
       description:
-        "Sulphocal 460 is a high-performance calcium sulphonate complex grease designed for use in heavy-duty applications. It provides excellent lubrication, corrosion protection, and resistance to water washout, ensuring optimal performance in demanding conditions.",
-      features: ["Biodegradable", "High Temperature Resistant"],
+        "High-performance calcium sulphonate complex grease for heavy-duty applications with excellent water resistance.",
+      features: ["Biodegradable", "High Temperature Resistant", "Water Resistant"],
       isApiProduct: false,
     },
   ];
@@ -508,28 +620,42 @@ const ProductsPage = () => {
   // Combine hardcoded products with API products
   const allProducts = [...hardcodedProducts, ...apiProducts];
 
-
+  // Updated categories with new structure
   const categories = [
     { id: "all", name: "All Products", icon: <Droplets className="h-4 w-4" /> },
     {
-      id: "engine-oil",
-      name: "Engine Oil",
-      icon: <Wrench className="h-4 w-4" />,
-    },
-    {
-      id: "Hydromax",
-      name: "Hydromax",
+      id: "hydromax-aw",
+      name: "Hydromax AW Series",
       icon: <Factory className="h-4 w-4" />,
     },
-    { id: "Gear Oil", name: "Gear Oil", icon: <Wrench className="h-4 w-4" /> },
-    { id: "Grease", name: "Grease", icon: <Droplets className="h-4 w-4" /> },
-    { id: "Aerosols", name: "Aerosols", icon: <Beaker className="h-4 w-4" /> },
-    { id: "api-product", name: "Custom Products", icon: <Beaker className="h-4 w-4" /> },
+    {
+      id: "hydromax-hvi",
+      name: "Hydromax HVI Series",
+      icon: <Factory className="h-4 w-4" />,
+    },
+    {
+      id: "polyplex-ht",
+      name: "Polyplex HT 460",
+      icon: <Thermometer className="h-4 w-4" />,
+    },
+    {
+      id: "lithomax-ep2",
+      name: "Lithomax EP2 Grease",
+      icon: <Shield className="h-4 w-4" />,
+    },
+    {
+      id: "lithplex-blue",
+      name: "Lithplex 220 Blue",
+      icon: <Droplets className="h-4 w-4" />,
+    },
+    {
+      id: "other-products",
+      name: "Other Products",
+      icon: <Beaker className="h-4 w-4" />,
+    },
   ];
 
-
-
-  // FIXED FILTERING LOGIC
+  // FILTERING LOGIC
   const filteredProducts = allProducts
     .filter((product) => {
       // Category filter
@@ -538,7 +664,7 @@ const ProductsPage = () => {
       // Search filter
       const searchMatch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
       
-      // Features filter - FIXED LOGIC
+      // Features filter
       const featuresMatch = selectedFeatures.length === 0 || 
         selectedFeatures.some((featureId) => {
           const featureName = lubricantFeatures.find(f => f.id === featureId)?.name;
@@ -576,7 +702,7 @@ const ProductsPage = () => {
     );
   }
 
-  return (
+return (
     <div className="min-h-screen bg-gray-200 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -641,6 +767,20 @@ const ProductsPage = () => {
 
           {/* Lubricant Features Checkboxes */}
           <div className="border-t pt-6">
+            <h4 className="font-semibold mb-3 text-gray-700">Filter by Features:</h4>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {lubricantFeatures.map((feature) => (
+                <label key={feature.id} className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={selectedFeatures.includes(feature.id)}
+                    onChange={() => handleFeatureChange(feature.id)}
+                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  />
+                  <span className="text-sm text-gray-700">{feature.name}</span>
+                </label>
+              ))}
+            </div>
 
             {selectedFeatures.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
@@ -853,7 +993,18 @@ const ProductsPage = () => {
                       </div>
                     )}
 
-
+                    {selectedProduct.features && selectedProduct.features.length > 0 && (
+                      <div className="mt-4">
+                        <h4 className="font-semibold mb-2">Key Features:</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedProduct.features.map((feature, idx) => (
+                            <span key={idx} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                              {feature}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
 
                     {selectedProduct.certifications && selectedProduct.certifications.length > 0 && (
                       <div className="mt-4">
@@ -922,5 +1073,4 @@ const ProductsPage = () => {
     </div>
   );
 };
-
 export default ProductsPage;
