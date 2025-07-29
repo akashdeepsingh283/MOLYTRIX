@@ -157,7 +157,7 @@ const ContactPage = () => {
                 }, {
                   icon: <MapPin className="h-6 w-6 text-purple-600" />,
                   title: 'Address',
-                  content: ['Regd.Office(India): 138/A/1/12, Nakshtra, Rajbag Colony Warnali, Sangli-416416','Plant Address: Avda.de Ranillas, 3A, 50018,Zaragoza Aragon, Spain-11600'],
+                  content: ['Regd.Office(India): 138/A/1/12, Nakshatra, Rajbag Colony Warnali, Sangli-416416','Plant Address: Avda.de Ranillas, 3A, 50018,Zaragoza Aragon, Spain-11600'],
                   bg: 'bg-purple-100'
                 }, {
                   icon: <Clock className="h-6 w-6 text-orange-600" />,
