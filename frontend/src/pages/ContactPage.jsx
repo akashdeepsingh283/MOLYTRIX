@@ -398,7 +398,7 @@ const ContactPage = () => {
               <div className="text-center">
                 <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                 <p className="text-sm text-gray-500 mt-2">
-                  <b>Reg.d office (India):</b> 138/A/1/12, Naktra, Rajbag Colony, Warnali, Sangli - 416416 <br />
+                  <b>Reg.d office (India):</b> 138/A/1/12, Nakshatra, Rajbag Colony, Warnali, Sangli - 416416 <br />
                   <b>Plant Address:</b> Avda.de Ranillas, 3A, 50018,Zaragoza Aragon, Spain 11600
                 </p>
                 <a href="https://maps.app.goo.gl/iuKMNjuW7mHeKgnQA?g_st=ac"
