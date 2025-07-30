@@ -82,7 +82,7 @@ const ProductsPage = () => {
       const transformedProducts = data.products.map((product) => ({
         id: product._id,
         name: product.heading,
-        category: "api-product", // You can modify this based on your needs
+        category: "all", // You can modify this based on your needs
         image: `${backendURL}${product.image}`, // Full URL for the image
         rating: 4.5, // Default rating, you can add this field to your backend
         description: product.description,
@@ -119,27 +119,52 @@ const ProductsPage = () => {
 
   // Hardcoded products (your existing ones) - FIXED CATEGORIES
  const hardcodedProducts = [
-    {
-      id: "1",
-      name: "Hydromax HVI 46",
-      category: "Hydromax",
-      image: img1,
-      rating: 4.5,
-      description:
-      "High performance hydraulic fluid, based on the latest base oil and additive technology. The use of an special additive pack warrants optimal performance and a long service life.",
-      specifications: [
-        "Vickers I-286-S & M-2950-S",
-        "AFNOR NF E 48-603 HL",
-        "DIN 51 524 PART 3 (HVLP)",
-        "FZG A/8.3/90 > 12 (ISO VG 46 and 68)",
-        "FZG A/8.3/90 = 12 (ISO VG 32)",
-        "CINCINATTI MILACRON P68/P69/P70 (ISO VG 32-68)",
-        "VDMA 24318",
-        "Thyssen HT-N-256132",
-        "US STEEL 126/127",
-      ],
-      isApiProduct: false,
-    },
+{
+  id: "1",
+  name: "Hydromax HVI 46",
+  category: "Hydromax",
+  image: img1,
+  rating: 4.5,
+  shortTitle: "Mineral based high performance hydraulic fluid with high viscosity index",
+  description:
+    "High performance hydraulic fluid, based on the latest base oil and additive technology. The use of a special additive pack warrants optimal performance and a long service life.",
+  specifications: [
+    "Vickers I-286-S & M-2950-S",
+    "AFNOR NF E 48-603 HL",
+    "DIN 51 524 PART 3 (HVLP)",
+    "FZG A/8.3/90 > 12 (ISO VG 46 and 68)",
+    "FZG A/8.3/90 = 12 (ISO VG 32)",
+    "CINCINATTI MILACRON P68/P69/P70 (ISO VG 32-68)",
+    "VDMA 24318",
+    "Thyssen HT-N-256132",
+    "US STEEL 126/127",
+  ],
+  isApiProduct: false,
+},
+{
+  id: "33",
+  name: "Hydromax HVI 68",
+  category: "Hydromax",
+  image: img1,
+  rating: 4.5,
+  shortTitle: "Mineral based high performance hydraulic fluid with high viscosity index",
+  description:
+    "High performance hydraulic fluid, based on the latest base oil and additive technology. The use of a special additive pack warrants optimal performance and a long service life.",
+  specifications: [
+    "Vickers I-286-S & M-2950-S",
+    "AFNOR NF E 48-603 HL",
+    "DIN 51 524 PART 3 (HVLP)",
+    "FZG A/8.3/90 > 12 (ISO VG 46 and 68)",
+    "FZG A/8.3/90 = 12 (ISO VG 32)",
+    "CINCINATTI MILACRON P68/P69/P70 (ISO VG 32-68)",
+    "VDMA 24318",
+    "Thyssen HT-N-256132",
+    "US STEEL 126/127",
+  ],
+  isApiProduct: false,
+},
+
+
     {
       id: "2",
       name: "Hydromax AW 68",
@@ -500,7 +525,6 @@ const ProductsPage = () => {
     { id: "Gear Oil", name: "Gear Oil", icon: <Wrench className="h-4 w-4" /> },
     { id: "Grease", name: "Grease", icon: <Droplets className="h-4 w-4" /> },
     { id: "Aerosols", name: "Aerosols", icon: <Beaker className="h-4 w-4" /> },
-    { id: "api-product", name: "Custom Products", icon: <Beaker className="h-4 w-4" /> },
   ];
 
 
@@ -790,9 +814,13 @@ const ProductsPage = () => {
                     </h2>
                   
 
-                    <p className="text-gray-700 mb-4">
-                      {selectedProduct.description}
-                    </p>
+<h3 className="text-lg font-semibold text-gray-900 mb-2">
+  {selectedProduct.shortTitle}
+</h3>
+<p className="text-gray-700 mb-4">
+  {selectedProduct.description}
+</p>
+
 
                     {selectedProduct.viscosity && (
                       <p className="mb-2">
