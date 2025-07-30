@@ -215,7 +215,7 @@ const ProductsPage = () => {
     }, 
     {
       id: "7",
-      name: "GREASE POLYPLEX HT 460",
+      name: "POLYPLEX HT 460",
       category: "Grease",
       image: img7,
       rating: 4.5,
