@@ -325,7 +325,7 @@ const HomePage = () => {
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Address</h3>
               <p className="text-gray-600">
                 Regd.Office(India): 
-                138/A/1/12, Nakshatra, Rajbag Colony Warnali, Sangli-416416
+                138/A/1/12, Nakshatra, Rajbag Colony Warnali, Sangli,Maharashtra, India-416416
                 <br />
                 Plant Address: 
                 Avda.de Ranillas, 3A, 50018,Zaragoza Aragon, Spain 11600
