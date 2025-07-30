@@ -118,7 +118,7 @@ const ProductsPage = () => {
   };
 
   // Hardcoded products (your existing ones) - FIXED CATEGORIES
-  const hardcodedProducts = [
+ const hardcodedProducts = [
     {
       id: "1",
       name: "Hydromax HVI 46",
@@ -168,7 +168,7 @@ const ProductsPage = () => {
       image: img3,
       rating: 4.7,
       description:
-"This product is a range of lithium soap thickened greases available in different NLGI classes. The product is a general-purpose product designed to perform in a wide variety of application requiring a grease with EP properties and load-carrying capacity. Contains an extreme pressure additive technology which has a low impact on the environment.",
+        "This product is specially formulated to lubricate all sorts of equipment and mechanisms. The grease will perform excellent for on- and off- road equipment, manufacturing, agriculture, mining, marine, forestry and general-purpose applications.",
       specifications: [
         "DIN 51502", "DIN 51825 KP N-30", "ISO 6743/9 L-XCDHB",
       ],
@@ -181,7 +181,7 @@ const ProductsPage = () => {
       image: img4,
       rating: 4.6,
       description:
-        "This product is a modern high performance product setting a new standard for a truly universal grease, suitable for both industrial and automotive ends. It is used in various types of bearing applications, including heavy load conditions and temperature peaks up to 160°C. ",
+        "This product is a lithium complex thickened lubricating grease based on mineral oil. The grease contains antioxidants, corrosion inhibitors, extreme pressure and anti-wear additives. The lithium complex soap makes this grease suitable for applications within a very wide temperature range and specially applications at high temperatures. The complex soap structure also gives the product a high degree of mechanical stability, which prolongs re-lubrication intervals.",
       specifications: [
         "DIN 51502", "DIN 51825 KP2P-30", "ISO 6743/9 L-XCEEB2", "ASTM D-4950 GC/LB",
             ],
@@ -207,7 +207,7 @@ const ProductsPage = () => {
       image: img6,
       rating: 4.4,
       description:
-"High performance multipurpose lubricating grease specially designed for operating in a wide temperatures range. Formulated with innovative organic thickeners and provided with a high chemical and thermal stability. In combination with the high viscosity synthetic base oil this product possesses outstanding lubricating capacity and resistance to aging.",
+        "This product is specially formulated to lubricate all sorts of equipment and mechanisms. The grease will perform excellent for on- and off- road equipment, manufacturing, agriculture, mining, marine, forestry and general-purpose applications.",
       specifications: [
         "Medium and high speed bearings", "Bearings in cold environments and cooling systems", "Electric motor bearings", "Fan bearings, exhausters and pumps", "Oven wagon and drying tunnel bearings", "Bearings in conveyor belts", "Bearings and bolts in chains operated under strong temperatures variations", "Plain bearings and joints in plastic-plastic and plastic-metal contacts","Lubrication of wire guides, plastic bearings and slides",
       ],
@@ -215,12 +215,12 @@ const ProductsPage = () => {
     }, 
     {
       id: "7",
-      name: "Polyplex HT 460",
+      name: "GREASE POLYPLEX HT 460",
       category: "Grease",
       image: img7,
       rating: 4.5,
       description:
-        "New technology high efficiency lubricating grease with a high viscosity base oil. It is formulated with a long life organic thickener, highly refined mineral oil and additive package to provide superior anti wear, EP properties and high antioxidant and anticorrosive capacity. The grease is perfectly suitable for bearing lubrication and for mechanisms exposed to the combined action of high temperatures, heavy loads and water action.",
+      "New technology high efficiency lubricating grease with a high viscosity base oil. It is formulated with a long life organic thickener, highly refined mineral oil and additive package to provide superior anti wear, EP properties and high antioxidant and anticorrosive capacity. The grease is perfectly suitable for bearing lubrication and for mechanisms exposed to the combined action of high temperatures, heavy loads and water action. This product is specially intended for the lubrication of mechanisms operating in severe conditions, more specifically in conditions such as those found in continuous casting bearings which are operating under high service temperature and pressures and where big quantities of cooling water and contaminating materials are present.",
       isApiProduct: false,
     },
     {
@@ -438,7 +438,10 @@ const ProductsPage = () => {
       image: img29,
       rating: 4.3,
       description:
-"This product is a range of lithium soap thickened greases available in different NLGI classes. The product is a general-purpose product designed to perform in a wide variety of application requiring a grease with EP properties and load-carrying capacity. Contains an extreme pressure additive technology which has a low impact on the environment.",
+      "This product is a range of lithium soap thickened greases available in different NLGI classes. The product is a general-purpose product designed to perform in a wide variety of application requiring a grease with EP properties and load-carrying capacity. Contains an extreme pressure additive technology which has a low impact on the environment. This product is particularly suitable for use in heavy duty bearings and general industrial lubrication.",
+      specifications: [
+      "DIN 51502", "DIN 51825 KP N-30", "ISO 6743/9 L-XCDHB",
+    ],
       isApiProduct: false,
     },
     {
@@ -448,8 +451,10 @@ const ProductsPage = () => {
       image: img30,
       rating: 4.5,
       description:
-"This product is a range of lithium soap thickened greases available in different NLGI classes. The product is a general-purpose product designed to perform in a wide variety of application requiring a grease with EP properties and load-carrying capacity. Contains an extreme pressure additive technology which has a low impact on the environment."
-,
+      "This product is a range of lithium soap thickened greases available in different NLGI classes. The product is a general-purpose product designed to perform in a wide variety of application requiring a grease with EP properties and load-carrying capacity. Contains an extreme pressure additive technology which has a low impact on the environment. This product is specially formulated to lubricate all sorts of equipment and mechanisms. The grease will perform excellent for on- and off- road equipment, manufacturing, agriculture, mining, marine, forestry and general-purpose applications. This product is particularly suitable for use in heavy duty bearings and general industrial lubrication.",
+      specifications: [
+        "DIN 51502", "DIN 51825 KP N-30", "ISO 6743/9 L-XCDHB",
+      ],
       isApiProduct: false,
     },
     {
@@ -459,7 +464,10 @@ const ProductsPage = () => {
       image: img31,
       rating: 4.6,
       description:
-        "Lithomax EP 3 is a high-performance lithium-based grease designed for use in various industrial and automotive applications. It provides excellent lubrication, corrosion protection, and resistance to water washout, ensuring optimal performance in demanding conditions.",
+      "This product is a range of lithium soap thickened greases available in different NLGI classes. The product is a general-purpose product designed to perform in a wide variety of application requiring a grease with EP properties and load-carrying capacity. Contains an extreme pressure additive technology which has a low impact on the environment. This product is specially formulated to lubricate all sorts of equipment and mechanisms. The grease will perform excellent for on- and off- road equipment, manufacturing, agriculture, mining, marine, forestry and general-purpose applications. This product is particularly suitable for use in heavy duty bearings and general industrial lubrication.",
+      specifications: [
+        "DIN 51502", "DIN 51825 KP N-30", "ISO 6743/9 L-XCDHB",
+      ],
       isApiProduct: false,
     },
     {
@@ -473,7 +481,6 @@ const ProductsPage = () => {
       isApiProduct: false,
     },
   ];
-
   // Combine hardcoded products with API products
   const allProducts = [...hardcodedProducts, ...apiProducts];
 
