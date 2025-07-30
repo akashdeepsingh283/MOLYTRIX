@@ -28,6 +28,7 @@ import img9 from "../img/Hydromax Series/Hydromax HLPD 68.png";
 import img10 from "../img/Hydromax Series/Hydromax HLPD 46.png";
 import img11 from "../img/Hydromax Series/Hydromax AW 32.png";
 import img12 from "../img/Hydromax Series/Hydromax AW 46.png";
+import img33 from "../img/Hydromax Series/Hydromax HVI 68.png";
 import img13 from "../img/Aerosols/Anti Spatter Spray.jpg";
 import img14 from "../img/Aerosols/Electrical Contact Cleaner Spray.jpg";
 import img15 from "../img/Aerosols/PCB card coating spray.jpg";
@@ -145,7 +146,7 @@ const ProductsPage = () => {
   id: "33",
   name: "Hydromax HVI 68",
   category: "Hydromax",
-  image: img1,
+  image: img33,
   rating: 4.5,
   shortTitle: "Mineral based high performance hydraulic fluid with high viscosity index",
   description:
