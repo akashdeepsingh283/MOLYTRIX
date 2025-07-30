@@ -438,7 +438,7 @@ const ProductsPage = () => {
       image: img29,
       rating: 4.3,
       description:
-        "Lithomax EP 00 is a high-performance lithium-based grease designed for use in various industrial and automotive applications. It provides excellent lubrication, corrosion protection, and resistance to water washout, ensuring optimal performance in demanding conditions.",
+"This product is a range of lithium soap thickened greases available in different NLGI classes. The product is a general-purpose product designed to perform in a wide variety of application requiring a grease with EP properties and load-carrying capacity. Contains an extreme pressure additive technology which has a low impact on the environment.",
       isApiProduct: false,
     },
     {
@@ -448,7 +448,8 @@ const ProductsPage = () => {
       image: img30,
       rating: 4.5,
       description:
-        "lithomax EP 1 is a high-performance lithium-based grease designed for use in various industrial and automotive applications. It provides excellent lubrication, corrosion protection, and resistance to water washout, ensuring optimal performance in demanding conditions.",
+"This product is a range of lithium soap thickened greases available in different NLGI classes. The product is a general-purpose product designed to perform in a wide variety of application requiring a grease with EP properties and load-carrying capacity. Contains an extreme pressure additive technology which has a low impact on the environment."
+,
       isApiProduct: false,
     },
     {
