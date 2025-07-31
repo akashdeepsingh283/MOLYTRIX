@@ -31,11 +31,6 @@ const RegisterPage = ({ onLogin }) => {
       name: "Industrial Solutions",
       description: "Hydraulic fluids, gear oils, cutting oils",
     },
-    {
-      id: "aviation",
-      name: "Aviation Products",
-      description: "High-performance lubricants for aircraft",
-    },
   ];
 
   const validateForm = () => {

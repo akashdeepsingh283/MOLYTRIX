@@ -285,8 +285,9 @@ const ProductsPage = () => {
       category: "Hydromax",
       image: img11,
       rating: 4.7,
+      shortTitle: "Mineral based high performance hydraulic fluid",
       description:
-        "High performance hydraulic fluid, based on the latest base oil and additive technology. This product is a so called detergent hydraulic fluid and therefore very suitable where miscibility with water is required. It is formulated using ashless chemistry, is detergent and will keep systems clean while operating.",
+"High performance hydraulic fluid, based on the latest base oil and additive technology. The use of an ashless additive pack warrants optimal performance and a long service life. It can be used in all available hydraulic applications, as well as light gear boxes and is perfectly suitable for general lubrication purposes.",
       isApiProduct: false,
     }, 
     {
@@ -295,8 +296,9 @@ const ProductsPage = () => {
       category: "Hydromax",
       image: img12,
       rating: 4.5,
+      shortTitle: "Mineral based high performance hydraulic fluid",
       description:
-        "High performance hydraulic fluid, based on the latest base oil and additive technology. This product is a so called detergent hydraulic fluid and therefore very suitable where miscibility with water is required. It is formulated using ashless chemistry, is detergent and will keep systems clean while operating.",
+"High performance hydraulic fluid, based on the latest base oil and additive technology. The use of an ashless additive pack warrants optimal performance and a long service life. It can be used in all available hydraulic applications, as well as light gear boxes and is perfectly suitable for general lubrication purposes.",
       isApiProduct: false,
     },
     {
