@@ -288,6 +288,17 @@ const ProductsPage = () => {
       shortTitle: "Mineral based high performance hydraulic fluid",
       description:
 "High performance hydraulic fluid, based on the latest base oil and additive technology. The use of an ashless additive pack warrants optimal performance and a long service life. It can be used in all available hydraulic applications, as well as light gear boxes and is perfectly suitable for general lubrication purposes.",
+            specifications: [
+        "Vickers 1-286-S & M-2950-S",
+        "AFNOR NF E 48-603 HM",
+        "DIN 51 524 PART 2 (HLP)",
+        "VDMA 24318",
+        "US STEEL 126/127",
+        "Thyssen TH-N-256132",
+        "FZG A/8.3/90 > 12 (ISO VG 46 and higher)",
+        "FZG A/8.3/90 = 12 (ISO VG 15, 22 and 32)",
+        "CINCINATTI MILACRON P68/P69/P70 (ISO VG 32-68)"
+      ],
       isApiProduct: false,
     }, 
     {
@@ -299,6 +310,17 @@ const ProductsPage = () => {
       shortTitle: "Mineral based high performance hydraulic fluid",
       description:
 "High performance hydraulic fluid, based on the latest base oil and additive technology. The use of an ashless additive pack warrants optimal performance and a long service life. It can be used in all available hydraulic applications, as well as light gear boxes and is perfectly suitable for general lubrication purposes.",
+            specifications: [
+        "Vickers 1-286-S & M-2950-S",
+        "AFNOR NF E 48-603 HM",
+        "DIN 51 524 PART 2 (HLP)",
+        "VDMA 24318",
+        "US STEEL 126/127",
+        "Thyssen TH-N-256132",
+        "FZG A/8.3/90 > 12 (ISO VG 46 and higher)",
+        "FZG A/8.3/90 = 12 (ISO VG 15, 22 and 32)",
+        "CINCINATTI MILACRON P68/P69/P70 (ISO VG 32-68)"
+      ],
       isApiProduct: false,
     },
     {
