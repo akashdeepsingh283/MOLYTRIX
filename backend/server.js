@@ -272,6 +272,40 @@ app.delete('/api/auth/Distributor/:id', protect, async (req, res) => {
   }
 });
 
+// Add this DELETE route for products in your backend (server.js)
+app.delete('/api/products/:id', protect, async (req, res) => {
+  try {
+    // Check if user is admin
+    if (req.user.email !== ADMIN_EMAIL) {
+      return res.status(403).json({ message: 'Access denied: Not an admin' });
+    }
+
+    const { id } = req.params;
+    console.log('Attempting to delete product with ID:', id);
+    
+    // Validate MongoDB ObjectId format
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'Invalid product ID format' });
+    }
+    
+    // Find and delete the product
+    const deletedProduct = await Product.findByIdAndDelete(id);
+    
+    if (!deletedProduct) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    console.log('Product deleted successfully:', deletedProduct);
+    res.status(200).json({ 
+      message: 'Product deleted successfully', 
+      deletedProduct 
+    });
+  } catch (err) {
+    console.error('Error deleting product:', err);
+    res.status(500).json({ message: 'Failed to delete product', error: err.message });
+  }
+});
+
 
 app.get('/api/products', async (req, res) => {
   try {

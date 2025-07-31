@@ -60,6 +60,9 @@ const ProductsPage = () => {
   const [apiProducts, setApiProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [deleteConfirm, setDeleteConfirm] = useState(null);
+const [currentUser, setCurrentUser] = useState(null);
+const [isAdmin, setIsAdmin] = useState(false);
 
   const handleViewDetails = (product) => {
     setSelectedProduct(product);
@@ -68,6 +71,30 @@ const ProductsPage = () => {
   const handleCloseModal = () => {
     setSelectedProduct(null);
   };
+
+  // Add this function to check if user is admin
+const checkAdminStatus = () => {
+  const token = localStorage.getItem('token');
+  const user = localStorage.getItem('user');
+  
+  if (token && user) {
+    try {
+      const userData = JSON.parse(user);
+      setCurrentUser(userData);
+      // Check if user email matches admin email
+      setIsAdmin(userData.email === 'molytrixpetrochem25@gmail.com');
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+      setIsAdmin(false);
+    }
+  } else {
+    setIsAdmin(false);
+  }
+};
+
+useEffect(() => {
+  checkAdminStatus();
+}, []);
 
   // Function to fetch products from API
   const fetchProducts = async () => {
@@ -107,6 +134,43 @@ const ProductsPage = () => {
       setLoading(false);
     }
   };
+
+  // 2. Add this delete function after the fetchProducts function
+const deleteProduct = async (productId) => {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('You must be logged in to delete products');
+      return;
+    }
+
+    if (!isAdmin) {
+      alert('You do not have permission to delete products');
+      return;
+    }
+
+    const response = await fetch(`${backendURL}/api/products/${productId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to delete product');
+    }
+
+    // Refresh the products list
+    fetchProducts();
+    setDeleteConfirm(null);
+    alert('Product deleted successfully');
+  } catch (err) {
+    console.error('Error deleting product:', err);
+    alert('Failed to delete product: ' + err.message);
+  }
+};
 
   // Fetch products on component mount
   useEffect(() => {
@@ -704,100 +768,133 @@ const ProductsPage = () => {
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
-            <div
-              key={product.id}
-              className="rounded-3xl bg-white shadow-md p-5 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300"
-            >
-              {/* Product Image */}
-              <div className="mb-4 flex justify-center">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="h-32 w-32 object-cover rounded-lg"
-                  onError={(e) => {
-                    e.target.src = img1;
-                  }}
-                />
-              </div>
+         {filteredProducts.map((product) => (
+  <div
+    key={product.id}
+    className="rounded-3xl bg-white shadow-md p-5 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300"
+  >
+    {/* Product Image */}
+    <div className="mb-4 flex justify-center">
+      <img
+        src={product.image}
+        alt={product.name}
+        className="h-32 w-32 object-cover rounded-lg"
+        onError={(e) => {
+          e.target.src = img1;
+        }}
+      />
+    </div>
 
-              {/* Product Name & Description */}
-              <div className="mb-4">
-                <h3 className="text-base sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl font-semibold text-gray-900">
-                  {product.name}
-                  {product.isApiProduct && (
-                    <span className="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                      New
-                    </span>
-                  )}
-                </h3>
-                <p className="text-sm text-gray-600 mt-1 line-clamp-3">
-                  {product.description}
-                </p>
-                
-              </div>
+    {/* Product Name & Description */}
+    <div className="mb-4">
+      <h3 className="text-base sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl font-semibold text-gray-900">
+        {product.name}
+        {product.isApiProduct && (
+          <span className="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+            New
+          </span>
+        )}
+      </h3>
+      <p className="text-sm text-gray-600 mt-1 line-clamp-3">
+        {product.description}
+      </p>
+    </div>
 
-              {/* View Details Button */}
-              <button 
-                onClick={() => { handleViewDetails(product) }} 
-                className="mt-auto boton-elegante mb-2"
-              >
-                Details
-              </button>
+    {/* Buttons Container */}
+    <div className="mt-auto flex flex-col gap-2">
+      {/* View Details Button */}
+      <button 
+        onClick={() => { handleViewDetails(product) }} 
+        className="boton-elegante"
+      >
+        Details
+      </button>
 
-              <style>{`
-                .boton-elegante {
-                  width: 80%;
-                  margin: 0 auto;
-                  padding: 10px 20px;
-                  border: 2px solid #2c2c2c;
-                  background-color: #1a1a1a;
-                  color: #ffffff;
-                  font-size: 1rem;
-                  cursor: pointer;
-                  border-radius: 30px;
-                  transition: all 0.4s ease;
-                  outline: none;
-                  position: relative;
-                  overflow: hidden;
-                  font-weight: bold;
-                  mt-auto;
-                }
+      {/* Delete Button - Only show for API products AND if user is admin */}
+      {product.isApiProduct && isAdmin && (
+        <button 
+          onClick={() => setDeleteConfirm(product)} 
+          className="boton-delete"
+        >
+          Delete
+        </button>
+      )}
+    </div>
 
-                .boton-elegante::after {
-                  content: "";
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  width: 100%;
-                  height: 100%;
-                  background: radial-gradient(
-                    circle,
-                    rgba(255, 255, 255, 0.25) 0%,
-                    rgba(255, 255, 255, 0) 70%
-                  );
-                  transform: scale(0);
-                  transition: transform 0.5s ease;
-                }
+    <style>{`
+      .boton-elegante {
+        width: 80%;
+        margin: 0 auto;
+        padding: 10px 20px;
+        border: 2px solid #2c2c2c;
+        background-color: #1a1a1a;
+        color: #ffffff;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 30px;
+        transition: all 0.4s ease;
+        outline: none;
+        position: relative;
+        overflow: hidden;
+        font-weight: bold;
+      }
 
-                .boton-elegante:hover::after {
-                  transform: scale(4);
-                }
+      .boton-elegante::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.25) 0%,
+          rgba(255, 255, 255, 0) 70%
+        );
+        transform: scale(0);
+        transition: transform 0.5s ease;
+      }
 
-                .boton-elegante:hover {
-                  border-color: #666666;
-                  background: #292929;
-                }
+      .boton-elegante:hover::after {
+        transform: scale(4);
+      }
 
-                .line-clamp-3 {
-                  display: -webkit-box;
-                  -webkit-line-clamp: 3;
-                  -webkit-box-orient: vertical;
-                  overflow: hidden;
-                }
-              `}</style>
-            </div>
-          ))}
+      .boton-elegante:hover {
+        border-color: #666666;
+        background: #292929;
+      }
+
+      .boton-delete {
+        width: 80%;
+        margin: 0 auto;
+        padding: 8px 16px;
+        border: 2px solid #dc2626;
+        background-color: #dc2626;
+        color: #ffffff;
+        font-size: 0.9rem;
+        cursor: pointer;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        outline: none;
+        font-weight: bold;
+      }
+
+      .boton-delete:hover {
+        background-color: #b91c1c;
+        border-color: #b91c1c;
+        transform: translateY(-1px);
+      }
+
+      .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    `}</style>
+  </div>
+))}
+
         </div>
 
         {/* Product Detail Modal */}
@@ -900,6 +997,51 @@ const ProductsPage = () => {
             </motion.div>
           )}
         </AnimatePresence>
+        {/* Delete Confirmation Modal */}
+{/* Delete Confirmation Modal */}
+<AnimatePresence>
+  {deleteConfirm && (
+    <motion.div
+      key="delete-modal"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+    >
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        className="bg-white p-6 rounded-lg max-w-md w-full mx-4 shadow-lg"
+      >
+        <h3 className="text-xl font-bold mb-4 text-gray-900">
+          Confirm Delete
+        </h3>
+        <p className="text-gray-600 mb-6">
+          Are you sure you want to delete "<strong>{deleteConfirm.name}</strong>"? 
+          This action cannot be undone.
+        </p>
+        <div className="flex gap-3 justify-end">
+          <button
+            onClick={() => setDeleteConfirm(null)}
+            className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => deleteProduct(deleteConfirm.id)}
+            className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+          >
+            Delete
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+
 
         {filteredProducts.length === 0 && (
           <div className="text-center py-16">
