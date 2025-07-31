@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AlertCircle, Plus, X, MapPin, Building, Phone, Globe } from 'lucide-react';
+import { AlertCircle, Plus, X, MapPin, Building, Phone, Globe, Trash2 } from 'lucide-react';
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -55,6 +55,49 @@ const Alert = ({ children, variant = 'default', onClose }) => {
           ×
         </button>
       )}
+    </div>
+  );
+};
+
+const ConfirmDeleteModal = ({ isOpen, onClose, onConfirm, distributorName, isDeleting }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md">
+        <div className="flex items-center space-x-3 mb-4">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+            <Trash2 className="w-5 h-5 text-red-600" />
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">Delete Distributor</h3>
+            <p className="text-sm text-gray-600">This action cannot be undone.</p>
+          </div>
+        </div>
+        
+        <p className="text-gray-700 mb-6">
+          Are you sure you want to delete <strong>{distributorName}</strong>?
+        </p>
+        
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-full sm:flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 disabled:opacity-50 text-sm sm:text-base"
+            disabled={isDeleting}
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={onConfirm}
+            className="w-full sm:flex-1 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50 text-sm sm:text-base"
+            disabled={isDeleting}
+          >
+            {isDeleting ? 'Deleting...' : 'Delete'}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
@@ -199,7 +242,7 @@ const AddDistributorModal = ({ isOpen, onClose, onSubmit, isSubmitting }) => {
   );
 };
 
-const DistributorCard = ({ distributor }) => (
+const DistributorCard = ({ distributor, onDelete, isAdmin, isDeleting }) => (
   <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
     <div className="space-y-3">
       <div className="flex items-start space-x-2">
@@ -233,6 +276,20 @@ const DistributorCard = ({ distributor }) => (
           <p className="text-gray-700 font-mono text-sm">{distributor.phone}</p>
         </div>
       </div>
+
+      {/* Delete button for cards - only show for database distributors and admin users */}
+      {isAdmin && distributor._id && (
+        <div className="pt-2 border-t border-gray-100">
+          <button
+            onClick={() => onDelete(distributor)}
+            disabled={isDeleting}
+            className="w-full flex items-center justify-center space-x-2 px-3 py-2 text-red-600 hover:bg-red-50 rounded-md transition-colors disabled:opacity-50"
+          >
+            <Trash2 className="w-4 h-4" />
+            <span className="text-sm">Delete</span>
+          </button>
+        </div>
+      )}
     </div>
   </div>
 );
@@ -267,12 +324,15 @@ const DistributorTable = () => {
 
   const [distributors, setDistributors] = useState(staticDistributors);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [distributorToDelete, setDistributorToDelete] = useState(null);
   const [viewMode, setViewMode] = useState('cards'); // 'cards' or 'table'
 
   useEffect(() => {
@@ -359,6 +419,73 @@ const DistributorTable = () => {
       setSubmitError('Network error. Please try again.');
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleDeleteDistributor = async (distributor) => {
+    setDistributorToDelete(distributor);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteDistributor = async () => {
+    if (!distributorToDelete || !distributorToDelete._id) return;
+
+    setIsDeleting(true);
+    setSubmitError('');
+    setSuccessMessage('');
+
+    try {
+      const token = getAuthToken();
+      console.log('Attempting to delete distributor:', distributorToDelete._id);
+      console.log('DELETE URL:', `${backendURL}/api/auth/Distributor/${distributorToDelete._id}`);
+      
+      const response = await fetch(`${backendURL}/api/auth/Distributor/${distributorToDelete._id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log('Delete response status:', response.status);
+      console.log('Delete response ok:', response.ok);
+
+      if (response.ok) {
+        setSuccessMessage('Distributor deleted successfully!');
+        setDistributors(prev => prev.filter(dist => dist._id !== distributorToDelete._id));
+        setShowDeleteModal(false);
+        setDistributorToDelete(null);
+        
+        setTimeout(() => setSuccessMessage(''), 3000);
+      } else {
+        // Handle error response - only read the body once
+        let errorMessage = `Failed to delete distributor (${response.status})`;
+        
+        try {
+          // Clone the response to avoid consuming the body multiple times
+          const responseClone = response.clone();
+          const contentType = response.headers.get('content-type');
+          
+          if (contentType && contentType.includes('application/json')) {
+            const data = await response.json();
+            errorMessage = data.message || errorMessage;
+          } else {
+            const textResponse = await responseClone.text();
+            errorMessage = textResponse || errorMessage;
+          }
+        } catch (parseError) {
+          console.error('Error parsing error response:', parseError);
+          // Use the default error message with status code
+        }
+        
+        console.error('Delete failed:', errorMessage);
+        setSubmitError(errorMessage);
+      }
+    } catch (error) {
+      console.error('Error deleting distributor:', error);
+      setSubmitError('Network error. Please try again.');
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -453,7 +580,13 @@ const DistributorTable = () => {
             /* Card View */
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {distributors.map((dist, index) => (
-                <DistributorCard key={index} distributor={dist} />
+                <DistributorCard 
+                  key={dist._id || index} 
+                  distributor={dist} 
+                  onDelete={handleDeleteDistributor}
+                  isAdmin={isAdmin}
+                  isDeleting={isDeleting}
+                />
               ))}
             </div>
           ) : (
@@ -474,11 +607,16 @@ const DistributorTable = () => {
                     <th className="text-left px-4 lg:px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Phone
                     </th>
+                    {isAdmin && (
+                      <th className="text-left px-4 lg:px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Actions
+                      </th>
+                    )}
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {distributors.map((dist, index) => (
-                    <tr key={index} className="hover:bg-gray-50 transition-colors">
+                    <tr key={dist._id || index} className="hover:bg-gray-50 transition-colors">
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <Globe className="w-4 h-4 text-blue-600 mr-2" />
@@ -503,6 +641,23 @@ const DistributorTable = () => {
                           <span className="text-sm text-gray-700 font-mono">{dist.phone}</span>
                         </div>
                       </td>
+                      {isAdmin && (
+                        <td className="px-4 lg:px-6 py-4 whitespace-nowrap">
+                          {/* Only show delete button for database distributors (those with _id) */}
+                          {dist._id ? (
+                            <button
+                              onClick={() => handleDeleteDistributor(dist)}
+                              disabled={isDeleting}
+                              className="inline-flex items-center px-3 py-1 border border-red-300 text-sm font-medium rounded-md text-red-700 bg-red-50 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 transition-colors"
+                            >
+                              <Trash2 className="w-4 h-4 mr-1" />
+                              Delete
+                            </button>
+                          ) : (
+                            <span className="text-xs text-gray-400">Static</span>
+                          )}
+                        </td>
+                      )}
                     </tr>
                   ))}
                 </tbody>
@@ -525,6 +680,18 @@ const DistributorTable = () => {
         onClose={() => setShowModal(false)}
         onSubmit={handleAddDistributor}
         isSubmitting={isSubmitting}
+      />
+
+      {/* Delete Confirmation Modal */}
+      <ConfirmDeleteModal
+        isOpen={showDeleteModal}
+        onClose={() => {
+          setShowDeleteModal(false);
+          setDistributorToDelete(null);
+        }}
+        onConfirm={confirmDeleteDistributor}
+        distributorName={distributorToDelete?.company}
+        isDeleting={isDeleting}
       />
     </div>
   );

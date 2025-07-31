@@ -238,6 +238,40 @@ app.post('/api/products', protect, upload.single('image'), async (req, res) => {
   }
 });
 
+// DELETE route for distributors (add this to your backend)
+app.delete('/api/auth/Distributor/:id', protect, async (req, res) => {
+  try {
+    // Check if user is admin
+    if (req.user.email !== ADMIN_EMAIL) {
+      return res.status(403).json({ message: 'Access denied: Not an admin' });
+    }
+
+    const { id } = req.params;
+    console.log('Attempting to delete distributor with ID:', id);
+    
+    // Validate MongoDB ObjectId format
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'Invalid distributor ID format' });
+    }
+    
+    // Find and delete the distributor
+    const deletedDistributor = await Distributors.findByIdAndDelete(id);
+    
+    if (!deletedDistributor) {
+      return res.status(404).json({ message: 'Distributor not found' });
+    }
+
+    console.log('Distributor deleted successfully:', deletedDistributor);
+    res.status(200).json({ 
+      message: 'Distributor deleted successfully', 
+      deletedDistributor 
+    });
+  } catch (err) {
+    console.error('Error deleting distributor:', err);
+    res.status(500).json({ message: 'Failed to delete distributor', error: err.message });
+  }
+});
+
 
 app.get('/api/products', async (req, res) => {
   try {
